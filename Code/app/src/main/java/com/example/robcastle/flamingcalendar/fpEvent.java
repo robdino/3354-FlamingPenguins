@@ -7,7 +7,7 @@ package com.example.robcastle.flamingcalendar;
  *
  * int compareTo(Event copy) return 1, or 0, or -1 (like a normal compareTo)
  *
- * set(int index, String date, String descrip, String startTime, String endTime) set event, return bool
+ * set(String date, String descrip, String startTime, String endTime) set event, return bool
  *
  * @author Robbie
  * @since 11/01/18
