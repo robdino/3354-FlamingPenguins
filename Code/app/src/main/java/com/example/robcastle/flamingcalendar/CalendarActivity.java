@@ -6,14 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.CalendarView;
 import android.content.*;
 
-//This class generates the calendar itself
+/**
+ * This class generates the Calendar
+ */
 public class CalendarActivity extends AppCompatActivity
 {
     private static final String TAG = "CalendarActivity";
 
     private CalendarView mCalendarView;
 
-    //NOTE: this creates the calendar activity itself
+    /**
+     * NOTE: this creates the calendar activity itself
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +25,11 @@ public class CalendarActivity extends AppCompatActivity
         mCalendarView = (CalendarView) findViewById(R.id.calendarView);
 
 
-        //NOTE: This is for when we select a new date in the calendar (the pink highlight)
-        //We go back to our main page (HomeScreen) to show the date and any pertinent info.
+        /**
+         * NOTE: This is for when we select a new date in the calendar (the pink highlight)
+         *       We go back to our main page (HomeScreen) to show the date and any pertinent info.
+         */
+
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
         {
             @Override
@@ -34,5 +41,7 @@ public class CalendarActivity extends AppCompatActivity
                 startActivity(intent2);
             }
         });
+
+
     }
 }

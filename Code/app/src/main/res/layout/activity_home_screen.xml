@@ -7,15 +7,40 @@
     tools:context=".HomeScreen">
 
     <Button
+        android:id="@+id/btnGoToMonthly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnGoToCalendar"
-        android:text="Open Calendar"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Open Monthly"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnGoToWeek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Open Weekly"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <TextView
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
-        android:layout_below="@+id/btnGoToCalendar"
+        android:layout_below="@+id/btnGoToMonthly"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -23,14 +48,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:hint="Date"
-        android:id="@+id/date"
 
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGoToCalendar"
+        app:layout_constraintTop_toBottomOf="@+id/btnGoToMonthly"
         app:layout_constraintVertical_bias="0.302" />
 
 </android.support.constraint.ConstraintLayout>

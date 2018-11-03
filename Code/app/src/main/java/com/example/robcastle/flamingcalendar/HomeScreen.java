@@ -2,6 +2,7 @@ package com.example.robcastle.flamingcalendar;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.content.*;
@@ -17,11 +18,13 @@ import android.content.*;
 * This time however, the default screen will display the date selected (ex. 10/31/18)
 *
  */
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity  {
 
     private static final String TAG = "MainActivity";
     public TextView date;
-    private Button btnGoToCalendar;
+    private Button btnGoToMonthly;
+    private Button btnGoToWeek;
+
 
     //create base app
     @Override
@@ -30,7 +33,8 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
         //generate button for calendar and date text
         date = (TextView) findViewById(R.id.date);
-        btnGoToCalendar = (Button) findViewById(R.id.btnGoToCalendar);
+        btnGoToMonthly = (Button) findViewById(R.id.btnGoToMonthly);
+        btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
 
         //Get info from calendar button click & display the date clicked
         Intent incomingIntent1 = getIntent();
@@ -38,11 +42,22 @@ public class HomeScreen extends AppCompatActivity {
         date.setText(incDate1);
 
         //handles the "Go To Calendar" button
-        btnGoToCalendar.setOnClickListener(new View.OnClickListener() {
+        btnGoToMonthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "onCreate, Going to CalendarActivity View");
                 Intent intent1 = new Intent(HomeScreen.this, CalendarActivity.class);
                 startActivity(intent1);
+            }
+        });
+
+        //handles the "Go To Week" button
+          btnGoToWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onCreate, Going to WeeklyView View");
+                Intent intent3 = new Intent(HomeScreen.this, WeeklyView.class);
+                startActivity(intent3);
             }
         });
     }

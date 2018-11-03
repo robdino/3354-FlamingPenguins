@@ -17,6 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".WeeklyView"></activity>
     </application>
+
+
 
 </manifest>
