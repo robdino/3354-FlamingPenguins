@@ -24,6 +24,7 @@ public class HomeScreen extends AppCompatActivity  {
     public TextView date;
     private Button btnGoToMonthly;
     private Button btnGoToWeek;
+    private Button btnGoToAddEvent;
 
 
     //create base app
@@ -35,6 +36,7 @@ public class HomeScreen extends AppCompatActivity  {
         date = (TextView) findViewById(R.id.date);
         btnGoToMonthly = (Button) findViewById(R.id.btnGoToMonthly);
         btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
+        btnGoToAddEvent = (Button) findViewById(R.id.btnGoToAddEvent);
 
         //Get info from calendar button click & display the date clicked
         Intent incomingIntent1 = getIntent();
@@ -58,6 +60,16 @@ public class HomeScreen extends AppCompatActivity  {
                 Log.d(TAG, "onCreate, Going to WeeklyView View");
                 Intent intent3 = new Intent(HomeScreen.this, WeeklyView.class);
                 startActivity(intent3);
+            }
+        });
+
+        //handles the "Go To Add Event" button
+        btnGoToAddEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onCreate, Going to Add Events");
+                Intent intent14 = new Intent(HomeScreen.this, AddEventActivity.class); //Testing by Anthony
+                startActivity(intent14);
             }
         });
     }
