@@ -33,6 +33,7 @@ public class HomeScreen extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         //generate button for calendar and date text
+
         date = (TextView) findViewById(R.id.date);
         btnGoToMonthly = (Button) findViewById(R.id.btnGoToMonthly);
         btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
