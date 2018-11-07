@@ -26,20 +26,19 @@ import android.widget.*;
 
 
      @Override
-     protected void onCreate(@Nullable Bundle savedInstanceState) {
-     super.onCreate(savedInstanceState);
-     setContentView(R.layout.add_event_screen);
+      protected void onCreate(@Nullable Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.add_event_screen);
+         Log.d(TAG, "onCreate, Add Event");
 
-     goToHome = (Button) findViewById(R.id.btnGoBackHome);
-     addEventButton = (Button) findViewById(R.id.addEventButton);
+         goToHome = (Button) findViewById(R.id.btnGoBackHome);
+         addEventButton = (Button) findViewById(R.id.addEventButton);
 
-     Log.d(TAG, "onCreate, Add Event");
-
-     eventNameInput = (EditText) findViewById(R.id.eventNameInput);
-     descriptionInput = (EditText) findViewById(R.id.descriptionInput);
-     dateInput = (EditText) findViewById(R.id.dateInput);
-     startTimeInput = (EditText) findViewById(R.id.startTimeInput);
-     endTimeInput = (EditText) findViewById(R.id.endTimeInput);
+         eventNameInput = (EditText) findViewById(R.id.eventNameInput);
+         descriptionInput = (EditText) findViewById(R.id.descriptionInput);
+         dateInput = (EditText) findViewById(R.id.dateInput);
+         startTimeInput = (EditText) findViewById(R.id.startTimeInput);
+         endTimeInput = (EditText) findViewById(R.id.endTimeInput);
 
 
      addEventButton.setOnClickListener(new View.OnClickListener () {
@@ -69,6 +68,7 @@ import android.widget.*;
              startActivity(intent4);
          }
      });
+
      }
  }
 
