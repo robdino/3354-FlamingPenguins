@@ -15,6 +15,15 @@ import java.util.ArrayList;
 public class WeeklyView extends AppCompatActivity
 {
     private static final String TAG = "WeeklyView";
+    private static ArrayList<fpEvent> eventList = new ArrayList();
+
+    public void setEventList(ArrayList eventList){
+        this.eventList = eventList;
+    }
+
+    public static ArrayList <fpEvent> getEventList(){
+        return eventList;
+    }
 
     private Button goToHome;
 
@@ -26,16 +35,8 @@ public class WeeklyView extends AppCompatActivity
         Log.d(TAG, "onCreate, Weekly View");
         ListView mListView = (ListView) findViewById(R.id.listView);
 
-        //create two test cases
-        fpEvent one = new fpEvent("10/31/18", "halloween", "12:00AM", "11:59PM");
-        fpEvent two = new fpEvent("11/3/18", "collect the infinity stones", "9:00AM", "12:00PM");
 
-
-        ArrayList<fpEvent> eventList = new ArrayList<>();
-        eventList.add(one);
-        eventList.add(two);
-
-        EventListAdapter adapter =  new EventListAdapter(this, R.layout.adaptor_weekly_view, eventList);
+        EventListAdapter adapter =  new EventListAdapter(this, R.layout.adaptor_weekly_view, getEventList());
         mListView.setAdapter(adapter);
 
         goToHome.setOnClickListener(new View.OnClickListener () {

@@ -46,12 +46,22 @@ import android.widget.*;
      public void onClick(View v)
          {
              Log.d(TAG, "onCreate, Adding event");
+             eventName = eventNameInput.getText().toString();
+             descriptionEvent = descriptionInput.getText().toString();
+             dateEvent = dateInput.getText().toString();
+             startTime = startTimeInput.getText().toString();
+             endTime = endTimeInput.getText().toString();
 
-             fpEvent newEvent = new fpEvent("dateInput.getText().toString()", "descriptionInput.getText().toString()",
-             "startTimeInput.getText().toString()", "endTimeInput.getText().toString()");
+             ArrayList<fpEvent> eventList = WeeklyView.getEventList();
+             if (eventName == null || eventName == "") {
+                 fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime);
+                 eventList.add(newEvent);
+             }
+             else{
+                 fpEvent newEvent = new fpEvent(dateEvent, eventName, startTime, endTime);
+                 eventList.add(newEvent);
+             }
 
-             ArrayList<fpEvent> eventList = new ArrayList<>();
-             eventList.add(newEvent);
 
              Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
              startActivity(intent6);
