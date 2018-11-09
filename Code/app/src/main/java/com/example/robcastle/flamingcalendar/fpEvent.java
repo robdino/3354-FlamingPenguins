@@ -49,25 +49,57 @@ public class fpEvent implements Comparable<fpEvent>
     }
 
     public int compareTo(fpEvent anotherEvent) {
-        if (getDate().compareTo(anotherEvent.getDate()) == 0){
-            if (getStartTime().compareTo(anotherEvent.getStartTime()) < 0){
+        String yearStr, yearAnotherStr, monthStr, monthAnotherStr, dayStr, dayAnotherStr;
+        int year, yearAnother, month, monthAnother, day, dayAnother;
+
+        yearStr = getDate().substring(getDate().lastIndexOf("/") + 1);
+        year = Integer.parseInt(yearStr);
+        monthStr = getDate().substring(0, getDate().indexOf('/'));
+        month = Integer.parseInt(monthStr);
+        dayStr = getDate().substring(getDate().indexOf('/') + 1 , getDate().lastIndexOf("/"));
+        day = Integer.parseInt(dayStr);
+
+
+        yearAnotherStr = anotherEvent.getDate().substring(anotherEvent.getDate().lastIndexOf("/") + 1);
+        yearAnother = Integer.parseInt(yearAnotherStr);
+        monthAnotherStr = anotherEvent.getDate().substring(0, anotherEvent.getDate().indexOf('/'));
+        monthAnother = Integer.parseInt(monthAnotherStr);
+        dayAnotherStr = anotherEvent.getDate().substring(anotherEvent.getDate().indexOf('/') + 1, anotherEvent.getDate().lastIndexOf("/"));
+        dayAnother = Integer.parseInt(dayAnotherStr);
+
+
+        if (year < yearAnother){
+            return -1;
+        }
+        else if (year > yearAnother){
+            return 1;
+        }
+        else{ //if year and yearAnother is the same.
+            if (month < monthAnother){
                 return -1;
             }
-            else if (getStartTime().compareTo(anotherEvent.getStartTime()) > 0){
+            else if (month > monthAnother){
                 return 1;
             }
             else {
-                return 0;
+                if (day < dayAnother){
+                    return -1;
+                }
+                else if (day > dayAnother){
+                    return 1;
+                }
+                else{
+                    if (getStartTime().compareTo(anotherEvent.getStartTime()) < 0){
+                        return -1;
+                    }
+                    else if (getStartTime().compareTo(anotherEvent.getStartTime()) > 0){
+                        return -1;
+                    }
+                    else{
+                        return 0;
+                    }
+                }
             }
-        }
-        else if (getDate().compareTo(anotherEvent.getDate()) < 0){
-            return -1;
-        }
-        else if (getDate().compareTo(anotherEvent.getDate()) > 0){
-            return 1;
-        }
-        else{
-            return -10;
         }
     }
 
