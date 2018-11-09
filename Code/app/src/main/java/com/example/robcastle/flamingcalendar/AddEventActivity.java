@@ -11,7 +11,15 @@ import android.widget.*;
 
  import java.util.ArrayList;
 
-
+/**
+ *@author Anthony Huynh
+ *@since 11/08/18
+ * This AddEventActivity class generates events for the application.
+ * It gets the event's name, description, date, start time, and end time inputs from the users.
+ * The Add Event button will create an event and display it in WeeklyView listed layout.
+ * The return to home button with send user back to the HomeScreen layout.
+ *
+ */
  public class AddEventActivity extends AppCompatActivity {
      private static final String TAG = "AddEventActivity";
      private Button goToHome;

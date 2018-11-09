@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class WeeklyView extends AppCompatActivity
@@ -22,6 +22,7 @@ public class WeeklyView extends AppCompatActivity
     }
 
     public static ArrayList <fpEvent> getEventList(){
+        Collections.sort(eventList);
         return eventList;
     }
 
