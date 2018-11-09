@@ -53,8 +53,8 @@ import android.widget.*;
              endTime = endTimeInput.getText().toString();
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
-             if (eventName == null || eventName == "") {
-                 fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime);
+             if (eventName == null || eventName == "" || eventName.equals("")) {
+                 fpEvent newEvent = new fpEvent(dateEvent, "Description: " + descriptionEvent, startTime, endTime);
                  eventList.add(newEvent);
              }
              else{
