@@ -49,6 +49,10 @@ public class fpEvent implements Comparable<fpEvent>
     }
 
     public int compareTo(fpEvent anotherEvent) {
+
+        if (anotherEvent == null)
+            return 0; //to not do anything with the null
+
         String yearStr, yearAnotherStr, monthStr, monthAnotherStr, dayStr, dayAnotherStr;
         int year, yearAnother, month, monthAnother, day, dayAnother;
 

@@ -31,6 +31,7 @@ import android.widget.*;
      EditText dateInput;
      EditText startTimeInput;
      EditText endTimeInput;
+     DatabaseHelper mDatabaseHelper;
 
 
      @Override
@@ -38,6 +39,8 @@ import android.widget.*;
          super.onCreate(savedInstanceState);
          setContentView(R.layout.add_event_screen);
          Log.d(TAG, "onCreate, Add Event");
+
+         mDatabaseHelper = new DatabaseHelper(this);
 
          goToHome = (Button) findViewById(R.id.btnGoBackHome);
          addEventButton = (Button) findViewById(R.id.addEventButton);
@@ -64,12 +67,13 @@ import android.widget.*;
              if (eventName == null || eventName == "" || eventName.equals("")) {
                  fpEvent newEvent = new fpEvent(dateEvent, "Description: " + descriptionEvent, startTime, endTime);
                  eventList.add(newEvent);
+                 mDatabaseHelper.addData(newEvent);
              }
              else{
                  fpEvent newEvent = new fpEvent(dateEvent, eventName, startTime, endTime);
                  eventList.add(newEvent);
+                 mDatabaseHelper.addData(newEvent);
              }
-
 
              Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
              startActivity(intent6);
@@ -88,5 +92,7 @@ import android.widget.*;
      });
 
      }
+
+
  }
 
