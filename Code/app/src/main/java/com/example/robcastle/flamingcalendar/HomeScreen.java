@@ -25,6 +25,7 @@ public class HomeScreen extends AppCompatActivity  {
     private Button btnGoToMonthly;
     private Button btnGoToWeek;
     private Button btnGoToAddEvent;
+    private Button btnGoToDaily;
 
 
     //create base app
@@ -38,6 +39,7 @@ public class HomeScreen extends AppCompatActivity  {
         btnGoToMonthly = (Button) findViewById(R.id.btnGoToMonthly);
         btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
         btnGoToAddEvent = (Button) findViewById(R.id.btnGoToAddEvent);
+        btnGoToDaily = (Button) findViewById(R.id.btnGoToDaily);
 
         //Get info from calendar button click & display the date clicked
         Intent incomingIntent1 = getIntent();
@@ -71,6 +73,16 @@ public class HomeScreen extends AppCompatActivity  {
                 Log.d(TAG, "onCreate, Going to Add Events");
                 Intent intent14 = new Intent(HomeScreen.this, AddEventActivity.class); //Testing by Anthony
                 startActivity(intent14);
+            }
+        });
+
+        //handles the "Go To Daily View" button
+        btnGoToDaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onCreate, Going to Daily View");
+                Intent intent15 = new Intent(HomeScreen.this, DailyView.class); //Testing by Anthony
+                startActivity(intent15);
             }
         });
     }
