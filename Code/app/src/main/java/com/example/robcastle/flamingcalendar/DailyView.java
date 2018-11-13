@@ -22,10 +22,8 @@ public class DailyView extends AppCompatActivity {
     }
 
     public static ArrayList <fpEvent> getEventList(){
-        Collections.sort(eventList);
         return eventList;
     }
-    private DatabaseHelper mDatabaseHelper;
     private Button goToHomeButton;
 
 
@@ -38,16 +36,9 @@ public class DailyView extends AppCompatActivity {
         goToHomeButton = (Button) findViewById(R.id.returnbutton);
         ListView mListView = (ListView) findViewById(R.id.dailyListView);
 
-        /************* DATABASE RELATED THINGS ***************/
-        mDatabaseHelper = new DatabaseHelper(this);
-        Log.d(TAG, "DailyView onCreate: before loadEventList");
-        setEventList( mDatabaseHelper.loadEventList() );    //get events from SQL database file
-        Log.d(TAG, "DailyView onCreate: after loadEventList");
+
 
         //Daily View activity stuff
-        //EventListAdapter adapter =  new EventListAdapter(this, R.layout.adaptor_daily_view, getEventList());
-        //mListView.setAdapter(adapter);
-
         goToHomeButton.setOnClickListener(new View.OnClickListener () {
             @Override
             public void onClick(View v)
