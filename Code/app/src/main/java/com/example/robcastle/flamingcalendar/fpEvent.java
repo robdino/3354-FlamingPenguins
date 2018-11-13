@@ -20,16 +20,16 @@ public class fpEvent implements Comparable<fpEvent>
     private String description;
     private String startTime;
     private String endTime;
-   // private String name;
+    private String name;
 
     /****************CONSTRUCTORS********************/
-    public fpEvent(String date, String description, String startTime, String endTime) //String name for last parameter?
+    public fpEvent(String date, String description, String startTime, String endTime, String name) //String name for last parameter?
     {
         this.date = date;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
-        //this.name = name;
+        this.name = name;
     }
 
     /*******************FUNCTIONS********************/
@@ -38,7 +38,7 @@ public class fpEvent implements Comparable<fpEvent>
     public boolean equalsTo(fpEvent anotherEvent) {
         if (this.date.equals(anotherEvent.getDate()) &&
             this.description.equals(anotherEvent.getDescription()) &&
-            //this.name.equals(anotherEvent.getName()) &&
+            this.name.equals(anotherEvent.getName()) &&
             this.startTime.equals(anotherEvent.getStartTime()) &&
             this.endTime.equals(anotherEvent.getEndTime()) ){
             return true;
@@ -138,7 +138,7 @@ public class fpEvent implements Comparable<fpEvent>
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
-/**
+
     public String getName() {
         return name;
     }
@@ -146,6 +146,6 @@ public class fpEvent implements Comparable<fpEvent>
     public void setName(String name) {
         this.name = name;
     }
-*/
+
 
 }

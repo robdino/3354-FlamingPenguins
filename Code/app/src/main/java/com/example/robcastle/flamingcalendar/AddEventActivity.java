@@ -65,12 +65,12 @@ import android.widget.*;
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
              if (eventName == null || eventName == "" || eventName.equals("")) {
-                 fpEvent newEvent = new fpEvent(dateEvent, "Description: " + descriptionEvent, startTime, endTime);
+                 fpEvent newEvent = new fpEvent(dateEvent, "Description: " + descriptionEvent, startTime, endTime, eventName);
                  eventList.add(newEvent);
                  mDatabaseHelper.addData(newEvent);
              }
              else{
-                 fpEvent newEvent = new fpEvent(dateEvent, eventName, startTime, endTime);
+                 fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, "");
                  eventList.add(newEvent);
                  mDatabaseHelper.addData(newEvent);
              }

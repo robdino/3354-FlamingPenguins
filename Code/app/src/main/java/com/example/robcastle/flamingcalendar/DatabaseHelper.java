@@ -6,13 +6,25 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Worth noting, this is an API from here: https://github.com/mitchtabian/SaveReadWriteDeleteSQLite
  * An associated YouTube video about the API: https://www.youtube.com/watch?v=aQAIMY-HzL8
  * I did some modifications to the class to make it work with our stuff.
+ *
+ * UPDATE: 11/12/18
+ * Things I need to do:
+ *
+ * Be able to update records
+ * Be able to delete records
+ * Create a method that will handle the loading of data into an ArrayList, rather than have
+ *          duplicate code everywhere doing the same thing.
+ *
  * @author Robbie
- * @since 11/11/18
+ * @since 11/12/18
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper
@@ -23,6 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     private static final String DESC        = "DESCRIPTION";
     private static final String START       = "STARTTIME";
     private static final String END         = "ENDTIME";
+    private static final String NAME        = "NAME";
 
 
     public DatabaseHelper(Context context) {
@@ -39,7 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 " (DATE VARCHAR(45) NOT NULL, " +
                 "DESCRIPTION VARCHAR(45) NOT NULL, " +
                 "STARTTIME VARCHAR(45) NOT NULL, " +
-                "ENDTIME VARCHAR(45) NOT NULL)";
+                "ENDTIME VARCHAR(45) NOT NULL, " +
+                "NAME VARCHAR(45) NOT NULL)";
         db.execSQL(createTable);
         Log.d(TAG, "onCreate: SQL database: making new db file");
     }
@@ -50,7 +64,10 @@ public class DatabaseHelper extends SQLiteOpenHelper
      * So this function aborts new table creation if one already exists
      */
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        Log.d(TAG, "onUpgrade: SQL database: hopefully opening existing db file");
+        //This is here so Android will stop crying
+
+        //The technical explanation: When extending (aka inheriting) the SQLiteOpenHelper class,
+        //  Android requires the new subclass (the child class) to override two methods: onCreate, and onUpgrade
     }
 
     /**
@@ -69,8 +86,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
         //load each piece of data in
         values.put("DATE",          item.getDate()          );
         values.put("DESCRIPTION",   item.getDescription()   );
-        values.put("STARTTIME",      item.getStartTime()     );
+        values.put("STARTTIME",     item.getStartTime()     );
         values.put("ENDTIME",       item.getEndTime()       );
+        values.put("NAME",          item.getName()          );
 
         //log - for testing purposes - what we plan to do
         Log.d(TAG, "addData: Adding " + values.toString() + " to " + TABLE_NAME);
@@ -91,13 +109,51 @@ public class DatabaseHelper extends SQLiteOpenHelper
      * @return
      */
     public Cursor getData(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         //the "SELECT * FROM [TABLE]" statement gets EVERY single piece of data from the table
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = db.rawQuery(query, null);
-       // data.close();
         return data;
+    }
+
+    /**
+     * @author Robbie
+     * @since 11/12/18
+     * @return new eventList w/update from SQL file
+     */
+    public ArrayList<fpEvent> loadEventList ()
+    {
+        ArrayList<fpEvent> eventList = new ArrayList<>();
+
+        Cursor data = getData(); //query for the data
+
+        int recordNum = data.getCount();    //get how many records
+
+        for(int i = 0; i < recordNum; i++)
+        {
+            data.moveToNext(); //Index starts at -1, so we moveToNext() so it starts from element 0
+
+            fpEvent newEvent = new fpEvent(
+                    data.getString(0), //DATE
+                    data.getString(1), //DESCRIPTION
+                    data.getString(2), //START TIME
+                    data.getString(3), //END TIME
+                    data.getString(4)  //NAME
+            );
+
+            Log.d(TAG, "loadEventList:" +
+                    " Date: "           + newEvent.getDate() +
+                    " Description: "    + newEvent.getDescription() +
+                    " Start Time: "     + newEvent.getStartTime() +
+                    " End Time: "       + newEvent.getEndTime() +
+                    " Name: "           + newEvent.getName()
+            );
+
+            eventList.add(newEvent);
+        }
+
+        return eventList;
     }
 
     /**
