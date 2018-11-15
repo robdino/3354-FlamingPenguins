@@ -42,26 +42,15 @@ import android.widget.*;
 
          mDatabaseHelper = new DatabaseHelper(this);
 
-         goToHome = (Button) findViewById(R.id.btnGoBackHome);
-         addEventButton = (Button) findViewById(R.id.addEventButton);
-
-         eventNameInput = (EditText) findViewById(R.id.eventNameInput);
-         descriptionInput = (EditText) findViewById(R.id.descriptionInput);
-         dateInput = (EditText) findViewById(R.id.dateInput);
-         startTimeInput = (EditText) findViewById(R.id.startTimeInput);
-         endTimeInput = (EditText) findViewById(R.id.endTimeInput);
-
+         generateButtons();
 
      addEventButton.setOnClickListener(new View.OnClickListener () {
      @Override
      public void onClick(View v)
          {
              Log.d(TAG, "onCreate, Adding event");
-             eventName = eventNameInput.getText().toString();
-             descriptionEvent = descriptionInput.getText().toString();
-             dateEvent = dateInput.getText().toString();
-             startTime = startTimeInput.getText().toString();
-             endTime = endTimeInput.getText().toString();
+
+             getEventStrings();
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
              if (eventName == null || eventName == "" || eventName.equals("")) {
@@ -91,6 +80,45 @@ import android.widget.*;
          }
      });
 
+     }
+
+
+     /*************** OTHER METHODS ******************/
+
+     
+    /**
+     * @author Robbbie
+     * @return void
+     * This function is just to make the .setOnClickListener() function easier to read.
+     * We get the inputs of each field here.
+     * @since 11/15/18
+     */
+    void getEventStrings()
+     {
+         eventName = eventNameInput.getText().toString();
+         descriptionEvent = descriptionInput.getText().toString();
+         dateEvent = dateInput.getText().toString();
+         startTime = startTimeInput.getText().toString();
+         endTime = endTimeInput.getText().toString();
+     }
+
+    /**
+     * @author Robbbie
+     * @return void
+     * This function is just to make the .onCreate() function easier to read.
+     * We build our buttons here.
+     * @since 11/15/18
+     */
+     void generateButtons()
+     {
+         goToHome = (Button) findViewById(R.id.btnGoBackHome);
+         addEventButton = (Button) findViewById(R.id.addEventButton);
+
+         eventNameInput = (EditText) findViewById(R.id.eventNameInput);
+         descriptionInput = (EditText) findViewById(R.id.descriptionInput);
+         dateInput = (EditText) findViewById(R.id.dateInput);
+         startTimeInput = (EditText) findViewById(R.id.startTimeInput);
+         endTimeInput = (EditText) findViewById(R.id.endTimeInput);
      }
 
 
