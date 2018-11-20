@@ -96,4 +96,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.82" />
 
+    <TextView
+        android:id="@+id/greetingHome"
+        android:layout_width="295dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:lineSpacingExtra="12sp"
+        android:text="Good Day"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:fontFamily="casual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

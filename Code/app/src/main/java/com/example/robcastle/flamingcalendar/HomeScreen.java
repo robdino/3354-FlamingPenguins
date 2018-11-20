@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.content.*;
+import java.util.Calendar;
 
 
 /**
@@ -22,11 +23,11 @@ public class HomeScreen extends AppCompatActivity  {
 
     private static final String TAG = "MainActivity";
     public TextView date;
+    public TextView greetingHome;
     private Button btnGoToMonthly;
     private Button btnGoToWeek;
     private Button btnGoToAddEvent;
     private Button btnGoToDaily;
-
 
     //create base app
     @Override
@@ -36,15 +37,34 @@ public class HomeScreen extends AppCompatActivity  {
         //generate button for calendar and date text
 
         date = (TextView) findViewById(R.id.date);
+        greetingHome = (TextView) findViewById(R.id.greetingHome);
         btnGoToMonthly = (Button) findViewById(R.id.btnGoToMonthly);
         btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
         btnGoToAddEvent = (Button) findViewById(R.id.btnGoToAddEvent);
         btnGoToDaily = (Button) findViewById(R.id.btnGoToDaily);
 
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+
         //Get info from calendar button click & display the date clicked
         Intent incomingIntent1 = getIntent();
         String incDate1 = incomingIntent1.getStringExtra("date");
         date.setText(incDate1);
+
+
+        //Change the home screen greeting depending on the time of day.
+        if (hour >= 0 && hour < 12){
+            greetingHome.setText("Good Morning");
+        }
+        else if(hour >= 12 && hour < 16){
+            greetingHome.setText("Good Afternoon");
+        }
+        else if(hour >= 16 && hour < 21){
+            greetingHome.setText("Good Evening");
+        }
+        else if(hour >= 21 && hour < 24){
+            greetingHome.setText("Good Night");
+        }
 
         //handles the "Go To Calendar" button
         btnGoToMonthly.setOnClickListener(new View.OnClickListener() {
