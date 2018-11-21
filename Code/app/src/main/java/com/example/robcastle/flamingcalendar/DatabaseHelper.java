@@ -8,7 +8,10 @@ import android.database.Cursor;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Worth noting, this is an API from here: https://github.com/mitchtabian/SaveReadWriteDeleteSQLite
@@ -108,7 +111,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
      * Returns all the data from database
      * @return
      */
-    public Cursor getData(){
+    public Cursor getData()
+    {
         SQLiteDatabase db = this.getReadableDatabase();
 
         //the "SELECT * FROM [TABLE]" statement gets EVERY single piece of data from the table
@@ -122,13 +126,14 @@ public class DatabaseHelper extends SQLiteOpenHelper
      * @since 11/12/18
      * @return new eventList w/update from SQL file
      */
-    public ArrayList<fpEvent> loadEventList ()
+    public ArrayList<fpEvent> loadWeeklyEventList()
     {
         ArrayList<fpEvent> eventList = new ArrayList<>();
 
         Cursor data = getData(); //query for the data
 
         int recordNum = data.getCount();    //get how many records
+
 
         for(int i = 0; i < recordNum; i++)
         {
@@ -142,7 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                     data.getString(4)  //NAME
             );
 
-            Log.d(TAG, "loadEventList:" +
+            Log.d(TAG, "loadWeeklyEventList:" +
                     " Date: "           + newEvent.getDate() +
                     " Description: "    + newEvent.getDescription() +
                     " Start Time: "     + newEvent.getStartTime() +
@@ -151,6 +156,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
             );
 
             eventList.add(newEvent);
+
         }
 
         return eventList;
@@ -168,6 +174,46 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 " WHERE " + DATE + " = '" + date + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
+    }
+
+    /**
+     * @author Robbie
+     * @since 11/20/18
+     * @return new eventList for a date w/update from SQL file
+     */
+    public ArrayList<fpEvent> getDailyData(String date)
+    {
+        ArrayList<fpEvent> eventList = new ArrayList<>();
+
+        Cursor data = getItemsForDate(date); //query for the data
+
+        int recordNum = data.getCount();    //get how many records
+
+
+        for(int i = 0; i < recordNum; i++)
+        {
+            data.moveToNext(); //Index starts at -1, so we moveToNext() so it starts from element 0
+
+            fpEvent newEvent = new fpEvent(
+                    data.getString(0), //DATE
+                    data.getString(1), //DESCRIPTION
+                    data.getString(2), //START TIME
+                    data.getString(3), //END TIME
+                    data.getString(4)  //NAME
+            );
+
+            Log.d(TAG, "getDailyData:" +
+                    " Date: "           + newEvent.getDate() +
+                    " Description: "    + newEvent.getDescription() +
+                    " Start Time: "     + newEvent.getStartTime() +
+                    " End Time: "       + newEvent.getEndTime() +
+                    " Name: "           + newEvent.getName()
+            );
+
+            eventList.add(newEvent);
+        }
+
+        return eventList;
     }
 
     /**
@@ -190,19 +236,20 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
     *//**
      * Delete from database
-     * @param id
-     * @param name
-     *//*
-    public void deleteName(int id, String name){
+     * @param
+     * @param
+     */
+    public void deleteRecord(String name, String date, String desc){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
-                + COL0 + " = '" + id + "'" +
-                " AND " + COL1 + " = '" + name + "'";
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + DATE + " = '" + date + "'"
+                + " AND " + DESC + " = '" + desc + "'";
+
         Log.d(TAG, "deleteName: query: " + query);
         Log.d(TAG, "deleteName: Deleting " + name + " from database.");
         db.execSQL(query);
     }
-*/
+
+
 }
 
 

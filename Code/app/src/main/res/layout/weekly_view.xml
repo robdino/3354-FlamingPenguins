@@ -9,13 +9,19 @@
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="369dp"
-        android:layout_height="417dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:layout_width="371dp"
+        android:layout_height="384dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnGoBackHome"
+        android:id="@+id/btnHome_Weekly"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
