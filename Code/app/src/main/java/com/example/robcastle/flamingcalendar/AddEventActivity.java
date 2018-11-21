@@ -1,6 +1,9 @@
 package com.example.robcastle.flamingcalendar;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;;
@@ -9,6 +12,7 @@ import android.view.View;
 import android.widget.*;
 
  import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *@author Anthony Huynh
@@ -23,11 +27,12 @@ import android.widget.*;
      private static final String TAG = "AddEventActivity";
      private Button goToHome;
      private Button addEventButton;
+     private DatePickerDialog.OnDateSetListener dateSetListener;
 
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
      EditText eventNameInput;
      EditText descriptionInput;
-     EditText dateInput;
+     TextView dateInput;
      EditText startTimeInput;
      EditText endTimeInput;
      DatabaseHelper mDatabaseHelper;
@@ -59,8 +64,40 @@ import android.widget.*;
 
              Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
              startActivity(intent6);
+
+
          }
      });
+     dateInput.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Calendar cal1 = Calendar.getInstance();
+             int year = cal1.get(Calendar.YEAR);
+             int month = cal1.get(Calendar.MONTH);
+             int day = cal1.get(Calendar.DAY_OF_MONTH);
+
+             DatePickerDialog dialog = new DatePickerDialog(
+                     AddEventActivity.this,
+                     android.R.style.Theme_Holo_Dialog_MinWidth,
+                     dateSetListener,
+                     year, month, day);
+             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+             dialog.show();
+         }
+     });
+
+     dateSetListener = new DatePickerDialog.OnDateSetListener() {
+         @Override
+         public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+             month = month + 1;
+             Log.d(TAG, "onDateSet: mm/dd/yyyy: " + month + "/" + dayOfMonth + "/" + year);
+             String date = month + "/" + dayOfMonth + "/" + year;
+             dateInput.setText(date);
+
+         }
+     };
+
+
 
 
      goToHome.setOnClickListener(new View.OnClickListener () {
@@ -109,10 +146,11 @@ import android.widget.*;
 
          eventNameInput = (EditText) findViewById(R.id.eventNameInput);
          descriptionInput = (EditText) findViewById(R.id.descriptionInput);
-         dateInput = (EditText) findViewById(R.id.dateInput);
+         dateInput = (TextView) findViewById(R.id.dateInput);
          startTimeInput = (EditText) findViewById(R.id.startTimeInput);
          endTimeInput = (EditText) findViewById(R.id.endTimeInput);
      }
+
 
 
  }
