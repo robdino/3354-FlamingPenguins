@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="8dp"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/daily_date"
+                android:layout_width="66dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="-3dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/cardDate"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/daily_name"
+                android:layout_width="145dp"
+                android:layout_height="24dp"
+                android:layout_alignTop="@+id/daily_date"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/daily_date"
+                android:text="@string/cardName"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/daily_description"
+                android:layout_width="144dp"
+                android:layout_height="37dp"
+                android:layout_below="@+id/daily_name"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="11dp"
+                android:layout_toRightOf="@+id/daily_date"
+                android:text="@string/cardDesc"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/daily_start"
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/daily_date"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/daily_description"
+                android:text="@string/cardStart"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/daily_end"
+                android:layout_width="52dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/daily_name"
+                android:layout_marginLeft="25dp"
+                android:layout_marginBottom="-20dp"
+                android:layout_toRightOf="@+id/daily_description"
+                android:text="@string/cardEnd"
+                android:textSize="10sp" />
+
+            <ImageButton
+                android:id="@+id/btnDaily_Delete"
+                android:layout_width="24dp"
+                android:layout_height="27dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="-1dp"
+                android:layout_marginRight="3dp"
+                android:contentDescription="deleteEvent"
+                app:srcCompat="@android:drawable/ic_menu_delete" />
+
+            <ImageButton
+                android:id="@+id/btnDaily_EditEvent"
+                android:layout_width="29dp"
+                android:layout_height="27dp"
+                android:layout_alignTop="@+id/btnDaily_Delete"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="0dp"
+                android:contentDescription="editEvent"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

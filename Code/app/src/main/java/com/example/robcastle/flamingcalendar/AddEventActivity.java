@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;;
-import android.util.EventLog;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -58,16 +57,10 @@ import java.util.Calendar;
              getEventStrings();
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
-             if (eventName == null || eventName == "" || eventName.equals("")) {
-                 fpEvent newEvent = new fpEvent(dateEvent, "Description: " + descriptionEvent, startTime, endTime, eventName);
-                 eventList.add(newEvent);
-                 mDatabaseHelper.addData(newEvent);
-             }
-             else{
-                 fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, "");
-                 eventList.add(newEvent);
-                 mDatabaseHelper.addData(newEvent);
-             }
+
+             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName);
+             eventList.add(newEvent);
+             mDatabaseHelper.addData(newEvent);
 
              Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
              startActivity(intent6);
@@ -148,7 +141,7 @@ import java.util.Calendar;
      */
      void generateButtons()
      {
-         goToHome = (Button) findViewById(R.id.btnGoBackHome);
+         goToHome = (Button) findViewById(R.id.btnHome_Daily);
          addEventButton = (Button) findViewById(R.id.addEventButton);
 
          eventNameInput = (EditText) findViewById(R.id.eventNameInput);

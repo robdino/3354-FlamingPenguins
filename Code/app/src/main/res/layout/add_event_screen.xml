@@ -10,7 +10,7 @@
 
 
     <Button
-        android:id="@+id/btnGoBackHome"
+        android:id="@+id/btnHome_Daily"
         android:layout_width="281dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -117,7 +117,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Add Event"
-        app:layout_constraintBottom_toTopOf="@+id/btnGoBackHome"
+        app:layout_constraintBottom_toTopOf="@+id/btnHome_Daily"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
