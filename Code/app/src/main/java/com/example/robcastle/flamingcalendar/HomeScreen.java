@@ -26,7 +26,7 @@ public class HomeScreen extends AppCompatActivity  {
     private Button btnGoToWeek;
     private Button btnGoToAddEvent;
     private Button btnGoToDaily;
-
+    private Button btnGoToAddNotification;
 
     //create base app
     @Override
@@ -40,7 +40,7 @@ public class HomeScreen extends AppCompatActivity  {
         btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
         btnGoToAddEvent = (Button) findViewById(R.id.btnGoToAddEvent);
         btnGoToDaily = (Button) findViewById(R.id.btnGoToDaily);
-
+        btnGoToAddNotification = (Button) findViewById(R.id.btnGoToAddNotification);
         //Get info from calendar button click & display the date clicked
         Intent incomingIntent1 = getIntent();
         String incDate1 = incomingIntent1.getStringExtra("date");
@@ -76,6 +76,16 @@ public class HomeScreen extends AppCompatActivity  {
             }
         });
 
+        //handles the "Go To Add Notification" button
+        btnGoToAddNotification.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onCreate, Going to Add Notification");
+                Intent intent16 = new Intent(HomeScreen.this, Notification.class); //Testing by Geoffrey
+                startActivity(intent16);
+            }
+        });
+
         //handles the "Go To Daily View" button
         btnGoToDaily.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,5 +96,4 @@ public class HomeScreen extends AppCompatActivity  {
             }
         });
     }
-
 }

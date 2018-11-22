@@ -20,6 +20,7 @@
         <activity android:name=".WeeklyView"></activity>
         <activity android:name=".AddEventActivity"></activity>
         <activity android:name=".DailyView"></activity>
+        <activity android:name=".Notification"></activity>
     </application>
 
 
