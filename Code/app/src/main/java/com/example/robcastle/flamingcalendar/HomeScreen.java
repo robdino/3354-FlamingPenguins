@@ -53,11 +53,11 @@ public class HomeScreen extends AppCompatActivity  {
         else if(hour >= 12 && hour < 16){
             greetingHome.setText("Good Afternoon");
         }
-        else if(hour >= 16 && hour < 21){
+        else if(hour >= 16 && hour < 24){
             greetingHome.setText("Good Evening");
         }
-        else if(hour >= 21 && hour < 24){
-            greetingHome.setText("Good Night");
+        else {
+            greetingHome.setText("Get Help");
         }
 
         //handles the "Go To Calendar" button
