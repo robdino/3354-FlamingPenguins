@@ -24,22 +24,6 @@
         app:layout_constraintVertical_bias="0.111" />
 
     <Button
-        android:id="@+id/btnGoToAddNotification"
-        android:layout_width="103dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginRight="54dp"
-        android:layout_marginBottom="8dp"
-        android:text="Add Notification*"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date"
-        app:layout_constraintVertical_bias="0.716" />
-
-    <Button
         android:id="@+id/btnGoToMonthly"
         android:layout_width="100dp"
         android:layout_height="61dp"
