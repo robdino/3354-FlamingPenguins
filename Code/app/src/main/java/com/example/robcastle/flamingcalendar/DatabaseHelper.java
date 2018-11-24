@@ -18,14 +18,6 @@ import java.util.Date;
  * An associated YouTube video about the API: https://www.youtube.com/watch?v=aQAIMY-HzL8
  * I did some modifications to the class to make it work with our stuff.
  *
- * UPDATE: 11/12/18
- * Things I need to do:
- *
- * Be able to update records
- * Be able to delete records
- * Create a method that will handle the loading of data into an ArrayList, rather than have
- *          duplicate code everywhere doing the same thing.
- *
  * @author Robbie
  * @since 11/12/18
  */
@@ -56,7 +48,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 "DESCRIPTION VARCHAR(45) NOT NULL, " +
                 "STARTTIME VARCHAR(45) NOT NULL, " +
                 "ENDTIME VARCHAR(45) NOT NULL, " +
-                "NAME VARCHAR(45) NOT NULL)";
+                "NAME VARCHAR(45) NOT NULL, " +
+                "IDnum INTEGER PRIMARY KEY)";
         db.execSQL(createTable);
         Log.d(TAG, "onCreate: SQL database: making new db file");
     }
@@ -71,6 +64,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
         //The technical explanation: When extending (aka inheriting) the SQLiteOpenHelper class,
         //  Android requires the new subclass (the child class) to override two methods: onCreate, and onUpgrade
+
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
     }
 
     /**
@@ -121,46 +117,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return data;
     }
 
-    /**
-     * @author Robbie
-     * @since 11/12/18
-     * @return new eventList w/update from SQL file
-     */
-    public ArrayList<fpEvent> loadWeeklyEventList()
-    {
-        ArrayList<fpEvent> eventList = new ArrayList<>();
-
-        Cursor data = getData(); //query for the data
-
-        int recordNum = data.getCount();    //get how many records
-
-
-        for(int i = 0; i < recordNum; i++)
-        {
-            data.moveToNext(); //Index starts at -1, so we moveToNext() so it starts from element 0
-
-            fpEvent newEvent = new fpEvent(
-                    data.getString(0), //DATE
-                    data.getString(1), //DESCRIPTION
-                    data.getString(2), //START TIME
-                    data.getString(3), //END TIME
-                    data.getString(4)  //NAME
-            );
-
-            Log.d(TAG, "loadWeeklyEventList:" +
-                    " Date: "           + newEvent.getDate() +
-                    " Description: "    + newEvent.getDescription() +
-                    " Start Time: "     + newEvent.getStartTime() +
-                    " End Time: "       + newEvent.getEndTime() +
-                    " Name: "           + newEvent.getName()
-            );
-
-            eventList.add(newEvent);
-
-        }
-
-        return eventList;
-    }
 
     /**
      * Returns only the records that match the date passed in
@@ -168,7 +124,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
      * @param date
      * @return
      */
-    public Cursor getItemsForDate(String date){
+    private Cursor getItemsForDate(String date){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME +
                 " WHERE " + DATE + " = '" + date + "'";
@@ -177,18 +133,80 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
     /**
+     * Returns only the record that match the IDnum passed in
+     * Can return only a single record, WILL NEED TO TEST THIS
+     * @param givenID
+     * @return
+     */
+    private Cursor getItemForID(int givenID){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + "IDnum" + " = '" + givenID + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    /**
      * @author Robbie
      * @since 11/20/18
-     * @return new eventList for a date w/update from SQL file
+     * @return new eventList using date
      */
     public ArrayList<fpEvent> getDailyData(String date)
     {
+        ArrayList<fpEvent> eventList;
+
+        Cursor data;
+        data = getItemsForDate(date); //query for the data
+
+        eventList = parseData(data);
+
+        return eventList;
+    }
+
+    /**
+     * @author Robbie
+     * @since 11/24/18
+     * @return new eventList using IDnum
+     */
+    public ArrayList<fpEvent> getDailyData(int givenID)
+    {
+        ArrayList<fpEvent> eventList;
+
+        Cursor data;
+        data = getItemForID(givenID); //query for the data
+
+        eventList = parseData(data);
+
+        return eventList;
+    }
+
+    /**
+     * @author Robbie
+     * @since 11/12/18
+     * @return new eventList w/update from SQL file
+     */
+    public ArrayList<fpEvent> loadWeeklyEventList()
+    {
+        ArrayList<fpEvent> eventList;
+
+        Cursor data;
+        data = getData(); //query for the data
+
+        eventList = parseData(data);
+
+        return eventList;
+    }
+
+    /**
+     * @author Robbie
+     * @since 11/24/18
+     * @return new eventList with parsed data
+     */
+    private ArrayList<fpEvent> parseData(Cursor data)
+    {
         ArrayList<fpEvent> eventList = new ArrayList<>();
 
-        Cursor data = getItemsForDate(date); //query for the data
-
         int recordNum = data.getCount();    //get how many records
-
 
         for(int i = 0; i < recordNum; i++)
         {
@@ -202,12 +220,16 @@ public class DatabaseHelper extends SQLiteOpenHelper
                     data.getString(4)  //NAME
             );
 
-            Log.d(TAG, "getDailyData:" +
+            int id = Integer.parseInt( data.getString(5) ); //IDnum
+            newEvent.setIDnum(id);
+
+            Log.d(TAG, "parseData:" +
                     " Date: "           + newEvent.getDate() +
                     " Description: "    + newEvent.getDescription() +
                     " Start Time: "     + newEvent.getStartTime() +
                     " End Time: "       + newEvent.getEndTime() +
-                    " Name: "           + newEvent.getName()
+                    " Name: "           + newEvent.getName() +
+                    " IDnum: "          + newEvent.getIDnum()
             );
 
             eventList.add(newEvent);

@@ -37,7 +37,7 @@ public class WeeklyView extends AppCompatActivity
         /************* ACTIVITY START RELATED THINGS ***************/
         setContentView(R.layout.weekly_view);
         goToHome = (Button) findViewById(R.id.btnHome_Weekly);
-        ListView mListView = (ListView) findViewById(R.id.listView);
+        final ListView mListView = (ListView) findViewById(R.id.listView);
 
         /************* DATABASE RELATED THINGS ***************/
         mDatabaseHelper = new DatabaseHelper(this);
@@ -48,6 +48,28 @@ public class WeeklyView extends AppCompatActivity
         /************* WEEKLYVIEW ACTIVITY RELATED THINGS ***************/
         EventListAdapter adapter =  new EventListAdapter(this, R.layout.adaptor_weekly_view, getEventList());
         mListView.setAdapter(adapter);
+
+        /************ BUTTON CLICKS **********************/
+
+        /**
+         * @author Robbie
+         * @since 11/24/18
+         * This is for when a card in WeeklyView gets clicked
+         * We open the data in DailyView by passing the SQLite ID tag to DatabaseHelper in DailyView.class
+         */
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object o = mListView.getItemAtPosition(position);
+                fpEvent str = (fpEvent) o; //To get our data
+                Intent intent5 = new Intent (WeeklyView.this, DailyView.class);
+
+                intent5.putExtra("extraInfo", true);
+                intent5.putExtra("specificID", str.getIDnum());
+
+                startActivity(intent5);
+            }
+        });
 
         goToHome.setOnClickListener(new View.OnClickListener () {
             @Override
