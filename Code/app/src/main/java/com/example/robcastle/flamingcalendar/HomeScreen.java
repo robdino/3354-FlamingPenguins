@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.*;
 import android.content.*;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 /**
@@ -25,6 +26,7 @@ public class HomeScreen extends AppCompatActivity  {
     private static final String TAG = "MainActivity";
     public TextView date;
     public TextView greetingHome;
+    public TextView dateHome;
     private Button btnGoToMonthly;
     private Button btnGoToWeek;
     private Button btnGoToAddEvent;
@@ -39,6 +41,10 @@ public class HomeScreen extends AppCompatActivity  {
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        String currentMonth = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
+        int currentDay = calendar.get(Calendar.DAY_OF_MONTH);
+        int currentYear = calendar.get(calendar.YEAR);
+        String dateFormat = currentDay + " " + currentMonth + " " + currentYear;
 
         //Get info from calendar button click & display the date clicked
         Intent incomingIntent1 = getIntent();
@@ -59,6 +65,8 @@ public class HomeScreen extends AppCompatActivity  {
         else {
             greetingHome.setText("Get Help");
         }
+
+        dateHome.setText(dateFormat);
 
         //handles the "Go To Calendar" button
         btnGoToMonthly.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +122,7 @@ public class HomeScreen extends AppCompatActivity  {
 
         date = (TextView) findViewById(R.id.date);
         greetingHome = (TextView) findViewById(R.id.greetingHome);
+        dateHome = (TextView) findViewById(R.id.dateHome);
         btnGoToMonthly = (Button) findViewById(R.id.btnGoToMonthly);
         btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
         btnGoToAddEvent = (Button) findViewById(R.id.btnGoToAddEvent);
