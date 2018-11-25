@@ -75,13 +75,29 @@ public class DailyView extends AppCompatActivity {
 
     private ArrayList<fpEvent> loadDailyData()
     {
-        //we get the current date
-        Date date = new Date();
-        String DATE_FORMAT = "MM/dd/yy";
-        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        ArrayList<fpEvent> dailyEvents;
+        boolean incIDnum = false;
+        Intent incomingIntent1 = getIntent();
+        incIDnum = incomingIntent1.getBooleanExtra("extraInfo", incIDnum);
 
-        Log.d(TAG, "loadDailyData, Going to getDailyData, formatted date is: " + sdf.format(date));
-        ArrayList<fpEvent> dailyEvents = dailyData.getDailyData(sdf.format(date));
+        //if we're just getting today's data
+        if(!incIDnum)
+        {
+            //we get the current date
+            Date date = new Date();
+            String DATE_FORMAT = "MM/dd/yyyy";
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+
+            Log.d(TAG, "loadDailyData, Going to getDailyData, formatted date is: " + sdf.format(date));
+            dailyEvents = dailyData.getDailyData(sdf.format(date));
+        }
+        else
+        {
+            int givenID = -1;
+            givenID = incomingIntent1.getIntExtra("specificID", givenID);
+
+            dailyEvents = dailyData.getDailyData(givenID);
+        }
         return dailyEvents;
     }
 

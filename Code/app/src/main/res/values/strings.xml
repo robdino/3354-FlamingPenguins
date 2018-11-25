@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">FlamingCalendar</string>
-    <string name="cardDate">MON XX</string>
+    <string name="cardDate">XX/XX/XXXX</string>
     <string name="cardName">name</string>
     <string name="cardDesc">description</string>
     <string name="cardStart">00:00AM</string>

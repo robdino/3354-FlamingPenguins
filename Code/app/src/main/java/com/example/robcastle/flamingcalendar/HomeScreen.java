@@ -96,6 +96,7 @@ public class HomeScreen extends AppCompatActivity  {
             public void onClick(View v) {
                 Log.d(TAG, "onCreate, Going to Daily View");
                 Intent intent15 = new Intent(HomeScreen.this, DailyView.class); //Testing by Anthony
+                intent15.putExtra("extraInfo", false); //here by Robbie //no touchy touchy :P
                 startActivity(intent15);
             }
         });

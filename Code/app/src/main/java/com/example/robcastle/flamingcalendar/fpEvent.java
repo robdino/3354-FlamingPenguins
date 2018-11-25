@@ -21,15 +21,17 @@ public class fpEvent implements Comparable<fpEvent>
     private String startTime;
     private String endTime;
     private String name;
+    private int IDnum;  //ID integer assigned by the database
 
     /****************CONSTRUCTORS********************/
-    public fpEvent(String date, String description, String startTime, String endTime, String name) //String name for last parameter?
+    public fpEvent(String date, String description, String startTime, String endTime, String name)
     {
         this.date = date;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.name = name;
+        this.IDnum = -1;    //-1 Means there is no ID num
     }
 
     /*******************FUNCTIONS********************/
@@ -147,5 +149,12 @@ public class fpEvent implements Comparable<fpEvent>
         this.name = name;
     }
 
+    public int getIDnum() { return IDnum; }
 
+    /**
+     * @author Robbie
+     * NEVER EVER use this method. Like, EVER.
+     * @param IDnum
+     */
+    protected void setIDnum (int IDnum) { this.IDnum = IDnum; }
 }
