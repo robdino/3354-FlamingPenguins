@@ -66,7 +66,7 @@ public class HomeScreen extends AppCompatActivity  {
             greetingHome.setText("Get Help");
         }
 
-        dateHome.setText(dateFormat);
+        dateHome.setText(dateFormat); //Set and displays the current date in DD MONTHNAME YYYY
 
         //handles the "Go To Calendar" button
         btnGoToMonthly.setOnClickListener(new View.OnClickListener() {

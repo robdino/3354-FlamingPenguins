@@ -1,15 +1,18 @@
 package com.example.robcastle.flamingcalendar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import java.util.ArrayList;
+import android.app.AlertDialog;
 
 /**
  * This is magic.
@@ -98,11 +101,24 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
                 public void onClick(View v)
                 {
                     Log.d(TAG, "DeleteButton, Going to Delete Event");
-                    deleteEvent(eventName.getText().toString(),
-                                eventDate.getText().toString(),
-                                eventDesc.getText().toString());
 
-                    itemView.getContext().startActivity(new Intent(itemView.getContext(), DailyView.class));
+                    //Confirmation pop-up
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                    builder.setMessage("Are you want to delete this event?")
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which){
+                            deleteEvent(eventName.getText().toString(),
+                                    eventDate.getText().toString(),
+                                    eventDesc.getText().toString());
+                            itemView.getContext().startActivity(new Intent(itemView.getContext(), DailyView.class));
+                             }
+                          })
+                            .setNegativeButton("Cancel", null);
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
                 }
             });
 
