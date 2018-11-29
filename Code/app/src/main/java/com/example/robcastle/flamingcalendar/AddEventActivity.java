@@ -128,7 +128,7 @@ import java.util.Calendar;
                  mTimePicker = new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
                      @Override
                      public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                         startTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                         endTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
                      }
                  }, hour, minute, false);//Yes 24 hour time
                  mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
