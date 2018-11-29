@@ -1,0 +1,4 @@
+#Mon Nov 12 22:58:27 CST 2018
+base.0=/Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/build/intermediates/transforms/dexMerger/debug/6
+path.0=classes.dex
+renamed.0=classes.dex

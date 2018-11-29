@@ -32,7 +32,7 @@ import java.util.Calendar;
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
      EditText eventNameInput;
      EditText descriptionInput;
-     TextView dateInput;
+     Button dateInput;
      EditText startTimeInput;
      EditText endTimeInput;
      DatabaseHelper mDatabaseHelper;
@@ -146,7 +146,7 @@ import java.util.Calendar;
 
          eventNameInput = (EditText) findViewById(R.id.eventNameInput);
          descriptionInput = (EditText) findViewById(R.id.descriptionInput);
-         dateInput = (TextView) findViewById(R.id.dateInput);
+         dateInput = (Button) findViewById(R.id.dateInput);
          startTimeInput = (EditText) findViewById(R.id.startTimeInput);
          endTimeInput = (EditText) findViewById(R.id.endTimeInput);
      }
