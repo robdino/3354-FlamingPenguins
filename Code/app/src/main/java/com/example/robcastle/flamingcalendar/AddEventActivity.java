@@ -33,8 +33,8 @@ import java.util.Calendar;
      EditText eventNameInput;
      EditText descriptionInput;
      Button dateInput;
-     EditText startTimeInput;
-     EditText endTimeInput;
+     Button startTimeInput;
+     Button endTimeInput;
      DatabaseHelper mDatabaseHelper;
 
 
@@ -147,8 +147,8 @@ import java.util.Calendar;
          eventNameInput = (EditText) findViewById(R.id.eventNameInput);
          descriptionInput = (EditText) findViewById(R.id.descriptionInput);
          dateInput = (Button) findViewById(R.id.dateInput);
-         startTimeInput = (EditText) findViewById(R.id.startTimeInput);
-         endTimeInput = (EditText) findViewById(R.id.endTimeInput);
+         startTimeInput = (Button) findViewById(R.id.startTimeInput);
+         endTimeInput = (Button) findViewById(R.id.endTimeInput);
      }
 
 
