@@ -1,6 +1,7 @@
 package com.example.robcastle.flamingcalendar;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -96,6 +97,44 @@ import java.util.Calendar;
 
          }
      };
+
+         startTimeInput.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Calendar mcurrentTime = Calendar.getInstance();
+                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                 int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                 TimePickerDialog mTimePicker;
+                 mTimePicker = new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                     @Override
+                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                         startTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                     }
+                 }, hour, minute, false);//Yes 24 hour time
+                 mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                 mTimePicker.show();
+             }
+         });
+
+         endTimeInput.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Calendar mcurrentTime = Calendar.getInstance();
+                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                 int minute = mcurrentTime.get(Calendar.MINUTE);
+
+                 TimePickerDialog mTimePicker;
+                 mTimePicker = new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                     @Override
+                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                         startTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                     }
+                 }, hour, minute, false);//Yes 24 hour time
+                 mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                 mTimePicker.show();
+             }
+         });
 
 
 
