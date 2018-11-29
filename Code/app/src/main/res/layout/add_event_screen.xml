@@ -33,8 +33,10 @@
         android:text="Start Time"
         app:layout_constraintBottom_toTopOf="@+id/btnHome_Daily"
         app:layout_constraintEnd_toEndOf="@+id/endTimeInput"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/endTimeInput"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionInput"
+        app:layout_constraintVertical_bias="0.124" />
 
     <Button
         android:id="@+id/btnHome_Daily"
@@ -65,18 +67,17 @@
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/descriptionInput"
         app:layout_constraintEnd_toStartOf="@+id/dateInput"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/descriptionInput"
-        android:layout_width="309dp"
+        android:layout_width="318dp"
         android:layout_height="86dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="#d5d6d6"
@@ -87,8 +88,6 @@
         app:layout_constraintHorizontal_bias="0.271"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateInput" />
-
-
 
 
     <Button
@@ -105,21 +104,40 @@
         android:text="Confirm Event"
         app:layout_constraintBottom_toTopOf="@+id/btnHome_Daily"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateInput"
-        app:layout_constraintVertical_bias="0.758" />
+        app:layout_constraintVertical_bias="0.913" />
 
     <Button
         android:id="@+id/dateInput"
         android:layout_width="105dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:background="#d5d6d6"
         android:text="Select Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/addReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Reminder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toEndOf="@+id/startTimeInput"
+        app:layout_constraintTop_toBottomOf="@+id/dateInput"
+        app:layout_constraintVertical_bias="0.35"
+        tools:checked="false" />
 
 </android.support.constraint.ConstraintLayout>

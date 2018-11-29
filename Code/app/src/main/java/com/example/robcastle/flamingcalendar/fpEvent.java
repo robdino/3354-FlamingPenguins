@@ -21,16 +21,18 @@ public class fpEvent implements Comparable<fpEvent>
     private String startTime;
     private String endTime;
     private String name;
+    private boolean reminder;
     private int IDnum;  //ID integer assigned by the database
 
     /****************CONSTRUCTORS********************/
-    public fpEvent(String date, String description, String startTime, String endTime, String name)
+    public fpEvent(String date, String description, String startTime, String endTime, String name, boolean reminder)
     {
         this.date = date;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.name = name;
+        this.reminder = reminder;
         this.IDnum = -1;    //-1 Means there is no ID num
     }
 
@@ -42,7 +44,7 @@ public class fpEvent implements Comparable<fpEvent>
             this.description.equals(anotherEvent.getDescription()) &&
             this.name.equals(anotherEvent.getName()) &&
             this.startTime.equals(anotherEvent.getStartTime()) &&
-            this.endTime.equals(anotherEvent.getEndTime()) ){
+            this.endTime.equals(anotherEvent.getEndTime())){
             return true;
         }
         else{
@@ -147,6 +149,14 @@ public class fpEvent implements Comparable<fpEvent>
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean getReminderCheck() {
+        return reminder;
+    }
+
+    public void setReminderCheck(boolean reminder) {
+        this.reminder = reminder;
     }
 
     public int getIDnum() { return IDnum; }

@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import java.lang.Object;
 import android.widget.ArrayAdapter;
 
 import java.text.DateFormat;
@@ -88,6 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         values.put("STARTTIME",     item.getStartTime()     );
         values.put("ENDTIME",       item.getEndTime()       );
         values.put("NAME",          item.getName()          );
+        values.put("REMINDER",          item.getReminderCheck()          );
 
         //log - for testing purposes - what we plan to do
         Log.d(TAG, "addData: Adding " + values.toString() + " to " + TABLE_NAME);
@@ -217,7 +219,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
                     data.getString(1), //DESCRIPTION
                     data.getString(2), //START TIME
                     data.getString(3), //END TIME
-                    data.getString(4)  //NAME
+                    data.getString(4), //NAME
+                    (data.getInt(5) == 1) //REMINDER
             );
 
             int id = Integer.parseInt( data.getString(5) ); //IDnum
@@ -229,6 +232,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                     " Start Time: "     + newEvent.getStartTime() +
                     " End Time: "       + newEvent.getEndTime() +
                     " Name: "           + newEvent.getName() +
+                    " Reminder: "       + newEvent.getReminderCheck() + //REMINDER ADDED.
                     " IDnum: "          + newEvent.getIDnum()
             );
 

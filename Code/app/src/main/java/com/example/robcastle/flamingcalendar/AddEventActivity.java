@@ -31,11 +31,13 @@ import java.util.Calendar;
      private DatePickerDialog.OnDateSetListener dateSetListener;
 
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
+     boolean reminder = false;
      EditText eventNameInput;
      EditText descriptionInput;
      Button dateInput;
      Button startTimeInput;
      Button endTimeInput;
+     Switch addReminder;
      DatabaseHelper mDatabaseHelper;
 
 
@@ -59,7 +61,7 @@ import java.util.Calendar;
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
 
-             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName);
+             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName, reminder);
              eventList.add(newEvent);
              mDatabaseHelper.addData(newEvent);
 
@@ -138,6 +140,20 @@ import java.util.Calendar;
 
 
 
+         addReminder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+             @Override
+             public void onCheckedChanged(CompoundButton cb, boolean on)
+             {
+                 //Log.d(TAG, "onCreate, Reminder Switch Changed");
+                 if (on){
+                     reminder = on;
+                 }
+                 else{
+                     reminder = on;
+                 }
+             }
+         });
+
 
      goToHome.setOnClickListener(new View.OnClickListener () {
          @Override
@@ -169,6 +185,7 @@ import java.util.Calendar;
          dateEvent = dateInput.getText().toString();
          startTime = startTimeInput.getText().toString();
          endTime = endTimeInput.getText().toString();
+         reminder = addReminder.isChecked();
      }
 
     /**
@@ -188,6 +205,7 @@ import java.util.Calendar;
          dateInput = (Button) findViewById(R.id.dateInput);
          startTimeInput = (Button) findViewById(R.id.startTimeInput);
          endTimeInput = (Button) findViewById(R.id.endTimeInput);
+         addReminder = (Switch) findViewById(R.id.addReminder);
      }
 
 
