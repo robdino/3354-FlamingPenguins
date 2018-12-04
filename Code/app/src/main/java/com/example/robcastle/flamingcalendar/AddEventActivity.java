@@ -38,6 +38,13 @@ import java.util.Calendar;
      Button endTimeInput;
      DatabaseHelper mDatabaseHelper;
 
+    /**
+     * @author Robbbie, Anthony, and Taylor
+     * @return void
+     * This function deals with the onClickListener of all the buttons and editText fields
+     * of of the addEventActivity class
+     * @since 12/04/18
+     */
 
      @Override
       protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,7 +116,9 @@ import java.util.Calendar;
                  mTimePicker = new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
                      @Override
                      public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                         startTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                         int hour = selectedHour % 12;
+                         startTimeInput.setText(String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
+                                 selectedMinute, selectedHour < 12 ? "am" : "pm"));
                      }
                  }, hour, minute, false);//Yes 24 hour time
                  mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -128,7 +137,9 @@ import java.util.Calendar;
                  mTimePicker = new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
                      @Override
                      public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                         endTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                         int hour = selectedHour % 12;
+                         endTimeInput.setText(String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
+                                 selectedMinute, selectedHour < 12 ? "am" : "pm"));
                      }
                  }, hour, minute, false);//Yes 24 hour time
                  mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
