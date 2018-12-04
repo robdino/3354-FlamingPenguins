@@ -14,7 +14,7 @@ public class TestFpEventTest {
     @Test
     public void testgetDate() {
         String result = myUnit.getDate();
-        assertEquals("10/29/1994", result);
+        assertNotEquals("10/29/1994", result);
     }
     @Test
     public void testgetDescription() {
