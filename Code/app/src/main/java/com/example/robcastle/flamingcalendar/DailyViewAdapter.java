@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Switch;
 import java.util.ArrayList;
 import android.app.AlertDialog;
 
@@ -61,7 +60,6 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         eventLoader.eventDesc.setText(dailyEvents.get(i).getDescription());
         eventLoader.eventStart.setText(dailyEvents.get(i).getStartTime());
         eventLoader.eventEnd.setText(dailyEvents.get(i).getEndTime());
-        eventLoader.eventReminder.setChecked(dailyEvents.get(i).getReminderCheck());
     }
 
     @Override
@@ -80,23 +78,12 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         TextView eventDesc;
         TextView eventStart;
         TextView eventEnd;
-        Switch eventReminder;
         ImageButton goToDeleteButton;
         ImageButton goToEdit;
 
         DailyEventHolder(final View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-
-            eventDate   = (TextView)itemView.findViewById(R.id.daily_date);
-            eventName   = (TextView)itemView.findViewById(R.id.daily_name);
-            eventDesc   = (TextView) itemView.findViewById(R.id.daily_description);
-            eventStart  = (TextView)itemView.findViewById(R.id.daily_start);
-            eventEnd    = (TextView) itemView.findViewById(R.id.daily_end);
-            eventReminder = (Switch) itemView.findViewById(R.id.daily_reminder);
-
-            goToDeleteButton = (ImageButton) itemView.findViewById(R.id.btnDaily_Delete);
-            goToEdit = (ImageButton) itemView.findViewById(R.id.btnDaily_EditEvent);
+            generateInfo();
 
             //WORK ON THIS
             //just delete from SQL records and refresh
@@ -109,16 +96,16 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
                     //Confirmation pop-up
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
-                    builder.setMessage("Are you want to delete this event?")
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog, int which){
-                            deleteEvent(eventName.getText().toString(),
-                                    eventDate.getText().toString(),
-                                    eventDesc.getText().toString());
-                            itemView.getContext().startActivity(new Intent(itemView.getContext(), DailyView.class));
-                             }
-                          })
+                    builder.setMessage("Are you sure you want to delete this event?")
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int which){
+                                    deleteEvent(eventName.getText().toString(),
+                                            eventDate.getText().toString(),
+                                            eventDesc.getText().toString());
+                                    itemView.getContext().startActivity(new Intent(itemView.getContext(), DailyView.class));
+                                }
+                            })
                             .setNegativeButton("Cancel", null);
                     AlertDialog alert = builder.create();
                     alert.show();
@@ -134,8 +121,8 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
                 {
                     Log.d(TAG, "EditButton, Going to AddEvent");
                     editEvent(eventName.getText().toString(),
-                              eventDate.getText().toString(),
-                              eventDesc.getText().toString());
+                            eventDate.getText().toString(),
+                            eventDesc.getText().toString());
 
                     itemView.getContext().startActivity(new Intent(itemView.getContext(), DailyView.class));
                 }
@@ -151,8 +138,33 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
 
         private void editEvent (String name, String date, String desc)
         {
-            //send intent data
             //deleteEvent(name, date, desc); //we then delete the event
+
+
+            //send intent data
+            DatabaseHelper dbHelp = new DatabaseHelper(itemView.getContext());
+            Intent toEdit = new Intent(itemView.getContext(), DailyView.class);
+            toEdit.putExtra("gettingInfo", true);
+            toEdit.putExtra("name", name);
+            toEdit.putExtra("date", date);
+            toEdit.putExtra("desc", desc);
+            itemView.getContext().startActivity(toEdit);
+
+
+        }
+
+        private void generateInfo()
+        {
+            cv = (CardView)itemView.findViewById(R.id.cv);
+
+            eventDate   = (TextView)itemView.findViewById(R.id.daily_date);
+            eventName   = (TextView)itemView.findViewById(R.id.daily_name);
+            eventDesc   = (TextView) itemView.findViewById(R.id.daily_description);
+            eventStart  = (TextView)itemView.findViewById(R.id.daily_start);
+            eventEnd    = (TextView) itemView.findViewById(R.id.daily_end);
+
+            goToDeleteButton = (ImageButton) itemView.findViewById(R.id.btnDaily_Delete);
+            goToEdit = (ImageButton) itemView.findViewById(R.id.btnDaily_EditEvent);
         }
     }
 }
