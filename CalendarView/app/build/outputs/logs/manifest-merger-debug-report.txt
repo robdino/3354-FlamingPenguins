@@ -1,0 +1,158 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/6d1001776d9cff18927305a9bb0f02da/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/Owner/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/1ce170658cff32b01dadb5feef631d15/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/8e7838bb993d873dec26006118d1de48/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5656a84a93dd775a8943a14f5571d8a8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/0ec2f3dd979b6ec1bf711ac997b3253b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/e1ffb087dff18e15205375638a488e99/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/7210b2d3dfad3d9d4262d3fd73486f38/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/60d253b5bee406f2ea73e5d0e9ead12b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/1cfaeb8465a498ac685ee5c70d32b030/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/4569ba197444c61510a6e302ab5e2952/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/aa768c6d3cc3ff3d573b146246c3e4f0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/aa8402f0f7cfcc76c9f0864bba3cc140/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/dbea0b5a84894afae063888dbb996d13/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/2a4fa069c6cdad374bfff4b270dc51a0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/a363c77bec491b4a6ade4a0e3f8b5e3d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/d4c2560152fa9f59e55f9ad04f57db7d/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b4d542f0675936c281260c0179b25c37/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/909d5a33f98c429061ff61ae5fc90513/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/5cb939b9f5062158df24aac49d72ebf4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/d0c9a69967b2a45d494cf24ae40feef5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/23b1eef1c3ba4a724daa8eb8b0f0dc77/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/fdfa28d976104c8cc5ec7f194fb64db0/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/09e0a665dd153b03c853e9d9e81f6cac/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/8642500e004eaa6e6e6a7b298c912958/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/5bcbd67a670a34e4a629ba67b59bf1ea/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e6550873fb3ca7cd652e257f24066bd2/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/9fdc6ee91cc111cc268123efd629b371/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+	package
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:3:5-39
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:1-22:12
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:5:5-20:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/Owner/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/1ce170658cff32b01dadb5feef631d15/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/Owner/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/1ce170658cff32b01dadb5feef631d15/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/d4c2560152fa9f59e55f9ad04f57db7d/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/d4c2560152fa9f59e55f9ad04f57db7d/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b4d542f0675936c281260c0179b25c37/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b4d542f0675936c281260c0179b25c37/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/d4c2560152fa9f59e55f9ad04f57db7d/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:11:9-40
+activity#com.example.calendarview.MainActivity
+ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:12:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:16:27-74
+activity#com.example.calendarview.CalendarActivity
+ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:19:9-63
+	android:name
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml:19:19-51
+uses-sdk
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/6d1001776d9cff18927305a9bb0f02da/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/6d1001776d9cff18927305a9bb0f02da/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/Owner/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/1ce170658cff32b01dadb5feef631d15/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/Owner/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/1ce170658cff32b01dadb5feef631d15/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/8e7838bb993d873dec26006118d1de48/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/8e7838bb993d873dec26006118d1de48/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5656a84a93dd775a8943a14f5571d8a8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/5656a84a93dd775a8943a14f5571d8a8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/0ec2f3dd979b6ec1bf711ac997b3253b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/0ec2f3dd979b6ec1bf711ac997b3253b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/e1ffb087dff18e15205375638a488e99/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/e1ffb087dff18e15205375638a488e99/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/7210b2d3dfad3d9d4262d3fd73486f38/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/7210b2d3dfad3d9d4262d3fd73486f38/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/60d253b5bee406f2ea73e5d0e9ead12b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/60d253b5bee406f2ea73e5d0e9ead12b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/1cfaeb8465a498ac685ee5c70d32b030/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/1cfaeb8465a498ac685ee5c70d32b030/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/4569ba197444c61510a6e302ab5e2952/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/4569ba197444c61510a6e302ab5e2952/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/aa768c6d3cc3ff3d573b146246c3e4f0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/aa768c6d3cc3ff3d573b146246c3e4f0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/aa8402f0f7cfcc76c9f0864bba3cc140/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/aa8402f0f7cfcc76c9f0864bba3cc140/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/dbea0b5a84894afae063888dbb996d13/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/dbea0b5a84894afae063888dbb996d13/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/2a4fa069c6cdad374bfff4b270dc51a0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/2a4fa069c6cdad374bfff4b270dc51a0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/a363c77bec491b4a6ade4a0e3f8b5e3d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/a363c77bec491b4a6ade4a0e3f8b5e3d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/d4c2560152fa9f59e55f9ad04f57db7d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/d4c2560152fa9f59e55f9ad04f57db7d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b4d542f0675936c281260c0179b25c37/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b4d542f0675936c281260c0179b25c37/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/909d5a33f98c429061ff61ae5fc90513/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/909d5a33f98c429061ff61ae5fc90513/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/5cb939b9f5062158df24aac49d72ebf4/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/5cb939b9f5062158df24aac49d72ebf4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/d0c9a69967b2a45d494cf24ae40feef5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/d0c9a69967b2a45d494cf24ae40feef5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/23b1eef1c3ba4a724daa8eb8b0f0dc77/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/23b1eef1c3ba4a724daa8eb8b0f0dc77/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/fdfa28d976104c8cc5ec7f194fb64db0/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/fdfa28d976104c8cc5ec7f194fb64db0/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/09e0a665dd153b03c853e9d9e81f6cac/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/09e0a665dd153b03c853e9d9e81f6cac/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/8642500e004eaa6e6e6a7b298c912958/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/8642500e004eaa6e6e6a7b298c912958/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/5bcbd67a670a34e4a629ba67b59bf1ea/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/5bcbd67a670a34e4a629ba67b59bf1ea/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e6550873fb3ca7cd652e257f24066bd2/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/Owner/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/e6550873fb3ca7cd652e257f24066bd2/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/9fdc6ee91cc111cc268123efd629b371/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/Owner/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/9fdc6ee91cc111cc268123efd629b371/AndroidManifest.xml:20:5-44
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+		ADDED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/Owner/Downloads/3354-FlamingPenguins/CalendarView/app/src/main/AndroidManifest.xml

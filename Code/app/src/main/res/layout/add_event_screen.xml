@@ -8,6 +8,33 @@
     android:background="@drawable/penguin">
 
 
+    <Button
+        android:id="@+id/endTimeInput"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="252dp"
+        android:layout_marginRight="252dp"
+        android:layout_marginBottom="8dp"
+        android:background="#d5d6d6"
+        android:text="End Time"
+        app:layout_constraintBottom_toTopOf="@+id/btnHome_Daily"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startTimeInput"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/startTimeInput"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#d5d6d6"
+        android:text="Start Time"
+        app:layout_constraintBottom_toTopOf="@+id/btnHome_Daily"
+        app:layout_constraintEnd_toEndOf="@+id/endTimeInput"
+        app:layout_constraintStart_toStartOf="@+id/endTimeInput"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
 
     <Button
         android:id="@+id/btnHome_Daily"
@@ -49,7 +76,7 @@
         android:layout_height="86dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="#d5d6d6"
@@ -57,58 +84,12 @@
         android:hint="Description of Event"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintHorizontal_bias="0.271"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateInput" />
 
-    <EditText
-        android:id="@+id/startTimeInput"
-        android:layout_width="121dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="44dp"
-        android:background="#d5d6d6"
-        android:ems="10"
-        android:hint="Start Time"
-        android:inputType="time"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
 
-    <EditText
-        android:id="@+id/endTimeInput"
-        android:layout_width="121dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="8dp"
-        android:background="#d5d6d6"
-        android:ems="10"
-        android:hint="End Time"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTimeInput"
-        app:layout_constraintVertical_bias="0.129" />
 
-    <TextView
-        android:id="@+id/dateInput"
-        android:layout_width="99dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="Select Date"
-        android:inputType="date"
-        android:textSize="18sp"
-        android:background="#d5d6d6"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
 
     <Button
         android:id="@+id/addEventButton"
@@ -124,67 +105,21 @@
         android:text="Confirm Event"
         app:layout_constraintBottom_toTopOf="@+id/btnHome_Daily"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.969"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateInput"
-        app:layout_constraintVertical_bias="0.746" />
+        app:layout_constraintVertical_bias="0.758" />
 
-    <Switch
-        android:id="@+id/AM_PM_1"
-        android:layout_width="69dp"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/endTimeInput"
-        app:layout_constraintEnd_toEndOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/endTimeInput" />
-
-    <Switch
-        android:id="@+id/AM_PM_2"
-        android:layout_width="70dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintBottom_toBottomOf="@+id/startTimeInput"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginTop="288dp"
+    <Button
+        android:id="@+id/dateInput"
+        android:layout_width="105dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:background="#d5d6d6"
-        android:text="AM | PM"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnHome_Daily"
-        app:layout_constraintEnd_toEndOf="@+id/AM_PM_2"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="@+id/AM_PM_2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04000002" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="68dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#d5d6d6"
-        android:text="AM | PM"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/AM_PM_2"
+        android:text="Select Date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionInput" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
