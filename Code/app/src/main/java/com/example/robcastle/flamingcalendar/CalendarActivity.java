@@ -36,8 +36,13 @@ public class CalendarActivity extends AppCompatActivity
         rtnHome = (Button) findViewById(R.id.rtnToHome);
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        currDate = "Events For " + sdf.format(new Date(mCalendarView.getDate()));
-        goToDate.setText(currDate);
+        currDate = sdf.format(new Date(mCalendarView.getDate()));
+        //i do this to get rid of 0 in, for example, "12/03/18"
+        //the dates we used are formatted "12/3/18"
+        if(currDate.indexOf("0") >= 0) {
+            currDate = currDate.substring(0, 3) + currDate.substring(4);
+        }
+        goToDate.setText( "Events For " + currDate);
 
         /**
          * This is for when a date is pushed on calendar. We get the new string of the date.
@@ -48,8 +53,7 @@ public class CalendarActivity extends AppCompatActivity
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth)
             {
                 currDate = (month + 1) + "/" + dayOfMonth + "/" + year;
-                currDate = "Events For " + currDate;
-                goToDate.setText(currDate);
+                goToDate.setText("Events For " + currDate);
             }
         });
 
@@ -60,14 +64,14 @@ public class CalendarActivity extends AppCompatActivity
         goToDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Button pushed goToDate, Going to WeeklyView View");
-                Intent intent3 = new Intent(CalendarActivity.this, DailyView.class);
-                intent3.putExtra("specificID", -1);
-                intent3.putExtra("date", goToDate.getText());
-                startActivity(intent3);
+                Log.d(TAG, "Button pushed goToDate, Going to WeeklyView View " + currDate);
+                Intent intent4 = new Intent(CalendarActivity.this, DailyView.class);
+                intent4.putExtra("extraInfo", true);
+                intent4.putExtra("specificID", -1);
+                intent4.putExtra("date", currDate);
+                startActivity(intent4);
             }
         });
-
 
         rtnHome.setOnClickListener(new View.OnClickListener() {
             @Override

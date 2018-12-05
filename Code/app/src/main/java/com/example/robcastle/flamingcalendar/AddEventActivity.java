@@ -51,10 +51,25 @@ import java.util.Calendar;
          super.onCreate(savedInstanceState);
          setContentView(R.layout.add_event_screen);
          Log.d(TAG, "onCreate, Add Event");
-
          mDatabaseHelper = new DatabaseHelper(this);
-
          generateButtons();
+
+         Intent incomingIntent1 = getIntent();
+         boolean receivingInfo = incomingIntent1.getBooleanExtra("gettingInfo", true);
+
+         if(receivingInfo)
+         {
+             String name, date, desc;
+             name = incomingIntent1.getStringExtra("name");
+             date = incomingIntent1.getStringExtra("date");
+             desc = incomingIntent1.getStringExtra("desc");
+
+             //we will pull info from DB
+             ArrayList<fpEvent> item = mDatabaseHelper.getDailyData(name, desc, date);
+
+         }
+
+
 
      addEventButton.setOnClickListener(new View.OnClickListener () {
      @Override
