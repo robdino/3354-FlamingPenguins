@@ -1,7 +1,6 @@
 package com.example.robcastle.flamingcalendar;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,9 +29,10 @@ public class DailyView extends AppCompatActivity {
     }
 
     private Button goToHomeButton;
-
+    private TextView datePlate;
     private RecyclerView rv;
     private DatabaseHelper dailyData;
+    private String dateFormat;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +41,7 @@ public class DailyView extends AppCompatActivity {
         /************* ACTIVITY START RELATED THINGS ***************/
         setContentView(R.layout.daily_view);
         goToHomeButton = (Button) findViewById(R.id.btnHome_Daily);
+        datePlate = (TextView) findViewById(R.id.dateHome3);
 
         rv = (RecyclerView) findViewById(R.id.rv);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -71,33 +71,44 @@ public class DailyView extends AppCompatActivity {
 
     }
 
-
-
     private ArrayList<fpEvent> loadDailyData()
     {
         ArrayList<fpEvent> dailyEvents;
         boolean incIDnum = false;
         Intent incomingIntent1 = getIntent();
         incIDnum = incomingIntent1.getBooleanExtra("extraInfo", incIDnum);
+        int givenID = -1;
+        givenID = incomingIntent1.getIntExtra("specificID", givenID);
 
         //if we're just getting today's data
-        if(!incIDnum)
-        {
+        if(!incIDnum) {
             //we get the current date
             Date date = new Date();
             String DATE_FORMAT = "MM/dd/yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+            String theDate = sdf.format(date);
+            if(theDate.indexOf("0") >= 0) {
+                theDate = theDate.substring(0, 3) + theDate.substring(4);
+            }
 
-            Log.d(TAG, "loadDailyData, Going to getDailyData, formatted date is: " + sdf.format(date));
-            dailyEvents = dailyData.getDailyData(sdf.format(date));
+            Log.d(TAG, "loadDailyData, Going to getDailyData, formatted date is: " + theDate);
+            dateFormat = theDate;
+            dailyEvents = dailyData.getDailyData(theDate);
         }
-        else
-        {
-            int givenID = -1;
-            givenID = incomingIntent1.getIntExtra("specificID", givenID);
-
+        else if(givenID != -1) {
             dailyEvents = dailyData.getDailyData(givenID);
+            dateFormat = dailyEvents.get(0).getDate();
         }
+        else {
+            String givenDate = "";
+            givenDate = incomingIntent1.getStringExtra("date");
+            Log.d(TAG, "loadDailyData, Going to getDailyData, given date is: " + givenDate);
+            dateFormat = givenDate;
+            dailyEvents = dailyData.getDailyData(givenDate);
+        }
+
+        datePlate.setText(dateFormat);
+
         return dailyEvents;
     }
 
