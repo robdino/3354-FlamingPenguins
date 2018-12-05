@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.content.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * This class generates the Calendar
  */
@@ -32,6 +35,9 @@ public class CalendarActivity extends AppCompatActivity
         goToDate = (Button) findViewById(R.id.goToDate);
         rtnHome = (Button) findViewById(R.id.rtnToHome);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        currDate = "Events For " + sdf.format(new Date(mCalendarView.getDate()));
+        goToDate.setText(currDate);
 
         /**
          * This is for when a date is pushed on calendar. We get the new string of the date.
@@ -56,7 +62,8 @@ public class CalendarActivity extends AppCompatActivity
             public void onClick(View v) {
                 Log.d(TAG, "Button pushed goToDate, Going to WeeklyView View");
                 Intent intent3 = new Intent(CalendarActivity.this, DailyView.class);
-                intent3.putExtra("dateForDaily", currDate);
+                intent3.putExtra("specificID", -1);
+                intent3.putExtra("date", goToDate.getText());
                 startActivity(intent3);
             }
         });
@@ -66,7 +73,7 @@ public class CalendarActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Button pushed rtnHome, Going to HomeScreen View");
-                Intent intent3 = new Intent(CalendarActivity.this, DailyView.class);
+                Intent intent3 = new Intent(CalendarActivity.this, HomeScreen.class);
                 startActivity(intent3);
             }
         });
