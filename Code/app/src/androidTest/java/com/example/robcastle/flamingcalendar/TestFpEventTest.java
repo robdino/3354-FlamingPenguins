@@ -15,11 +15,11 @@ public class TestFpEventTest {
 
     @Before
     public void setUp() {
-        myUnit = new fpEvent("10/29/2018", "Birthday", "12:00am", "12:00pm", "Party");
-        myUnit2 = new fpEvent("10/29/2018", "Birthday", "12:00am", "12:00pm", "Party");
-        myUnit3 = new fpEvent("10/29/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting");
-        myUnit4 = new fpEvent("11/29/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting");
-        myUnit5 = new fpEvent("10/30/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting");
+        myUnit = new fpEvent("10/29/2018", "Birthday", "12:00 am", "12:00 pm", "Party");
+        myUnit2 = new fpEvent("10/29/2018", "Birthday", "12:00 am", "12:00 pm", "Party");
+        myUnit3 = new fpEvent("10/29/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
+        myUnit4 = new fpEvent("11/29/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
+        myUnit5 = new fpEvent("10/30/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
     }
 
     @Test
@@ -51,27 +51,27 @@ public class TestFpEventTest {
     @Test
     public void testgetStartTime() {
         String result = myUnit.getStartTime();
-        assertEquals("12:00am", result);
+        assertEquals("12:00 am", result);
     }
 
     @Test
     public void testsetStartTime() {
-        myUnit.setStartTime("3:00pm");
+        myUnit.setStartTime("3:00 pm");
         String result = myUnit.getStartTime();
-        assertEquals("2:00pm", result);
+        assertNotEquals("2:00 pm", result);
     }
 
     @Test
     public void testgetEndTime() {
         String result = myUnit.getEndTime();
-        assertEquals("12:00pm", result);
+        assertEquals("12:00 pm", result);
     }
 
     @Test
     public void testsetEndTime() {
-        myUnit.setEndTime("2:00pm");
+        myUnit.setEndTime("2:00 pm");
         String result = myUnit.getEndTime();
-        assertEquals("2:00pm", result);
+        assertEquals("2:00 pm", result);
     }
 
     @Test
