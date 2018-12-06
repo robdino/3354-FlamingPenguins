@@ -29,6 +29,7 @@ import java.util.Calendar;
      private Button goToHome;
      private Button addEventButton;
      private DatePickerDialog.OnDateSetListener dateSetListener;
+     private boolean receivingInfo;
 
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
      EditText eventNameInput;
@@ -37,6 +38,8 @@ import java.util.Calendar;
      Button startTimeInput;
      Button endTimeInput;
      DatabaseHelper mDatabaseHelper;
+
+    ArrayList<fpEvent> item;
 
     /**
      * @author Robbbie, Anthony, and Taylor
@@ -52,10 +55,11 @@ import java.util.Calendar;
          setContentView(R.layout.add_event_screen);
          Log.d(TAG, "onCreate, Add Event");
          mDatabaseHelper = new DatabaseHelper(this);
+         receivingInfo = false;
          generateButtons();
 
          Intent incomingIntent1 = getIntent();
-         boolean receivingInfo = incomingIntent1.getBooleanExtra("gettingInfo", true);
+         receivingInfo = incomingIntent1.getBooleanExtra("gettingInfo", receivingInfo);
 
          if(receivingInfo)
          {
@@ -65,17 +69,34 @@ import java.util.Calendar;
              desc = incomingIntent1.getStringExtra("desc");
 
              //we will pull info from DB
-             ArrayList<fpEvent> item = mDatabaseHelper.getDailyData(name, desc, date);
+             item = mDatabaseHelper.getDailyData(date, desc, name);
 
+             dateInput.setText(item.get(0).getDate());
+             dateEvent = item.get(0).getDate();
+
+             eventNameInput.setText(item.get(0).getName());
+             eventName = item.get(0).getName();
+
+             descriptionInput.setText(item.get(0).getDescription());
+             descriptionEvent = item.get(0).getDescription();
+
+             startTimeInput.setText(item.get(0).getStartTime());
+             startTime = item.get(0).getStartTime();
+
+             endTimeInput.setText(item.get(0).getEndTime());
+             endTime = item.get(0).getEndTime();
          }
-
-
 
      addEventButton.setOnClickListener(new View.OnClickListener () {
      @Override
      public void onClick(View v)
          {
              Log.d(TAG, "onCreate, Adding event");
+
+             if(receivingInfo) {
+                 mDatabaseHelper.deleteRecord(item.get(0).getIDnum());
+                 receivingInfo = false;
+             }
 
              getEventStrings();
 
@@ -169,6 +190,7 @@ import java.util.Calendar;
          @Override
          public void onClick(View v)
          {
+             receivingInfo = false;
              Log.d(TAG, "onCreate, Going to HomeScreen View");
              Intent intent4 = new Intent(AddEventActivity.this, HomeScreen.class);
              startActivity(intent4);

@@ -123,8 +123,6 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
                     editEvent(eventName.getText().toString(),
                               eventDate.getText().toString(),
                               eventDesc.getText().toString());
-
-                    itemView.getContext().startActivity(new Intent(itemView.getContext(), DailyView.class));
                 }
             });
 
@@ -139,17 +137,13 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         private void editEvent (String name, String date, String desc)
         {
             //deleteEvent(name, date, desc); //we then delete the event
-
-
             //send intent data
-            DatabaseHelper dbHelp = new DatabaseHelper(itemView.getContext());
-            Intent toEdit = new Intent(itemView.getContext(), DailyView.class);
+            Intent toEdit = new Intent(itemView.getContext(), AddEventActivity.class);
             toEdit.putExtra("gettingInfo", true);
             toEdit.putExtra("name", name);
             toEdit.putExtra("date", date);
             toEdit.putExtra("desc", desc);
             itemView.getContext().startActivity(toEdit);
-
 
         }
 

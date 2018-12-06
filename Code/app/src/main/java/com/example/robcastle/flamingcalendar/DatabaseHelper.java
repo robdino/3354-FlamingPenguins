@@ -301,6 +301,15 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
 
+    public void deleteRecord(final int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + "IDnum" + " = '" + id + "'";
+
+        Log.d(TAG, "deleteName: query: " + query);
+        Log.d(TAG, "deleteName: Deleting " + id + " from database.");
+        db.execSQL(query);
+    }
+
 }
 
 
