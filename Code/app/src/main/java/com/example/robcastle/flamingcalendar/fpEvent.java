@@ -1,5 +1,9 @@
 package com.example.robcastle.flamingcalendar;
 
+import android.content.Intent;
+
+import java.util.Calendar;
+
 /**
  * We need to implement the following functions:
  *
@@ -25,7 +29,7 @@ public class fpEvent implements Comparable<fpEvent>
     private int IDnum;  //ID integer assigned by the database
 
     /****************CONSTRUCTORS********************/
-    public fpEvent(String date, String description, String startTime, String endTime, String name, boolean reminder)
+    public fpEvent(String date, String description, String startTime, String endTime, String name,boolean reminder)
     {
         this.date = date;
         this.description = description;
@@ -151,8 +155,20 @@ public class fpEvent implements Comparable<fpEvent>
         this.name = name;
     }
 
-    public boolean getReminderCheck() {
+    public Boolean getReminderCheck() {
         return reminder;
+    }
+
+    public Intent setReminder() {
+        Calendar cal = Calendar.getInstance();
+        Intent intent = new Intent(Intent.ACTION_EDIT);
+        intent.setType("vdn.android.cursor.item/event");
+        intent.putExtra("beginTime", cal.getTimeInMillis());
+        intent.putExtra("allDay", false);
+        intent.putExtra("rrule", "FREQ=DAILY");
+        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+        intent.putExtra("title", "A Test Event from android app");
+        return intent;
     }
 
     public void setReminderCheck(boolean reminder) {

@@ -12,10 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.Random;
+
 public class Notification extends AppCompatActivity {
 
     NotificationCompat.Builder notification;
-    private static final int uniqueID = 78946;
+    //private static final int uniqueID = 78946;
+    Random random = new Random();
+    int uniqueID = random.nextInt(9999-1000) + 1000;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +36,9 @@ public class Notification extends AppCompatActivity {
     public void btnGoToNotificationClicked(View view) {
         notification.setSmallIcon(R.drawable.flamingpenguin);
         notification.setTicker("This is the ticker");
-        notification.setShowWhen(true);
-        notification.setWhen(System.currentTimeMillis());
 
+        notification.setWhen(System.currentTimeMillis());
+        notification.setShowWhen(true);
         notification.setContentTitle("Here is the title");
         notification.setContentText("I am the body text of your notification");
 

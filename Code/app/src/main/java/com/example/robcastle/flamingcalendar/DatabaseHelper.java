@@ -32,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     private static final String START       = "STARTTIME";
     private static final String END         = "ENDTIME";
     private static final String NAME        = "NAME";
+    private static final String REMINDER    = "REMINDER";
 
 
     public DatabaseHelper(Context context) {
@@ -50,7 +51,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 "STARTTIME VARCHAR(45) NOT NULL, " +
                 "ENDTIME VARCHAR(45) NOT NULL, " +
                 "NAME VARCHAR(45) NOT NULL, " +
-                "IDnum INTEGER PRIMARY KEY)";
+                "IDnum INTEGER PRIMARY KEY," +
+                "REMINDER INTEGER DEFAULT 0)";
         db.execSQL(createTable);
         Log.d(TAG, "onCreate: SQL database: making new db file");
     }
@@ -89,7 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         values.put("STARTTIME",     item.getStartTime()     );
         values.put("ENDTIME",       item.getEndTime()       );
         values.put("NAME",          item.getName()          );
-        values.put("REMINDER",          item.getReminderCheck()          );
+        values.put("REMINDER",      item.getReminderCheck() );
 
         //log - for testing purposes - what we plan to do
         Log.d(TAG, "addData: Adding " + values.toString() + " to " + TABLE_NAME);

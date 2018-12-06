@@ -116,8 +116,10 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
+                android:checked="false"
                 android:text="Reminder"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:checked="false" />
 
         </RelativeLayout>
 
