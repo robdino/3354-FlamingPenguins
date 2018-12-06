@@ -31,7 +31,6 @@ public class HomeScreen extends AppCompatActivity  {
     private Button btnGoToWeek;
     private Button btnGoToAddEvent;
     private Button btnGoToDaily;
-    private Button btnGotoAddNotification;
 
     //create base app
     @Override
@@ -109,16 +108,6 @@ public class HomeScreen extends AppCompatActivity  {
                 startActivity(intent15);
             }
         });
-
-//        //handles the "Go To Add Notification" button
-//        btnGotoAddNotification.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onCreate, Going to Daily View");
-//                Intent intent16 = new Intent(HomeScreen.this, Notification.class); //Testing by Anthony
-//                startActivity(intent16);
-//            }
-//        });
     }
 
     /**
@@ -138,7 +127,6 @@ public class HomeScreen extends AppCompatActivity  {
         btnGoToWeek = (Button) findViewById(R.id.btnGoToWeek);
         btnGoToAddEvent = (Button) findViewById(R.id.btnGoToAddEvent);
         btnGoToDaily = (Button) findViewById(R.id.btnGoToDaily);
-        //btnGotoAddNotification = (Button) findViewById(R.id.btnGoToAddNotification);
     }
 
 }
