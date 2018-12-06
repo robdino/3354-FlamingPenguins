@@ -14,7 +14,8 @@
         android:gravity="center"
         android:text="Date"
         android:textAlignment="center"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView4"
@@ -24,7 +25,8 @@
         android:gravity="center"
         android:text="description"
         android:textAlignment="center"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -38,7 +40,8 @@
             android:layout_height="30dp"
             android:gravity="center"
             android:text="startTime"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView3"
@@ -47,7 +50,8 @@
             android:layout_below="@id/textView2"
             android:gravity="center"
             android:text="endTime"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

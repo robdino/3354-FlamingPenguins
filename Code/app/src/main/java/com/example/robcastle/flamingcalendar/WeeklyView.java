@@ -66,8 +66,7 @@ public class WeeklyView extends AppCompatActivity
                 Intent intent5 = new Intent (WeeklyView.this, DailyView.class);
 
                 intent5.putExtra("extraInfo", true);
-                intent5.putExtra("specificID", str.getIDnum());
-
+                intent5.putExtra("date", str.getDate());
                 startActivity(intent5);
             }
         });

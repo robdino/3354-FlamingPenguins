@@ -67,7 +67,6 @@ public class CalendarActivity extends AppCompatActivity
                 Log.d(TAG, "Button pushed goToDate, Going to WeeklyView View " + currDate);
                 Intent intent4 = new Intent(CalendarActivity.this, DailyView.class);
                 intent4.putExtra("extraInfo", true);
-                intent4.putExtra("specificID", -1);
                 intent4.putExtra("date", currDate);
                 startActivity(intent4);
             }

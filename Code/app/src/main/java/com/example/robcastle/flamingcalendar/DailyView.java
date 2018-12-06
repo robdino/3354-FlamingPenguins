@@ -77,8 +77,6 @@ public class DailyView extends AppCompatActivity {
         boolean incIDnum = false;
         Intent incomingIntent1 = getIntent();
         incIDnum = incomingIntent1.getBooleanExtra("extraInfo", incIDnum);
-        int givenID = -1;
-        givenID = incomingIntent1.getIntExtra("specificID", givenID);
 
         //if we're just getting today's data
         if(!incIDnum) {
@@ -94,10 +92,6 @@ public class DailyView extends AppCompatActivity {
             Log.d(TAG, "loadDailyData, Going to getDailyData, formatted date is: " + theDate);
             dateFormat = theDate;
             dailyEvents = dailyData.getDailyData(theDate);
-        }
-        else if(givenID != -1) {
-            dailyEvents = dailyData.getDailyData(givenID);
-            dateFormat = dailyEvents.get(0).getDate();
         }
         else {
             String givenDate = "";
