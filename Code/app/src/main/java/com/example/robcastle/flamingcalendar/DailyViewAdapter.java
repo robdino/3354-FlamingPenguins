@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Switch;
 import java.util.ArrayList;
 import android.app.AlertDialog;
 
@@ -60,6 +61,7 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         eventLoader.eventDesc.setText(dailyEvents.get(i).getDescription());
         eventLoader.eventStart.setText(dailyEvents.get(i).getStartTime());
         eventLoader.eventEnd.setText(dailyEvents.get(i).getEndTime());
+        eventLoader.eventReminder.setChecked(dailyEvents.get(i).getReminderCheck());
     }
 
     @Override
@@ -78,13 +80,13 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         TextView eventDesc;
         TextView eventStart;
         TextView eventEnd;
+        Switch eventReminder;
         ImageButton goToDeleteButton;
         ImageButton goToEdit;
 
         DailyEventHolder(final View itemView) {
             super(itemView);
             generateInfo();
-
             //WORK ON THIS
             //just delete from SQL records and refresh
             goToDeleteButton.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +158,7 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
             eventDesc   = (TextView) itemView.findViewById(R.id.daily_description);
             eventStart  = (TextView)itemView.findViewById(R.id.daily_start);
             eventEnd    = (TextView) itemView.findViewById(R.id.daily_end);
+            eventReminder = (Switch) itemView.findViewById(R.id.daily_reminder);
 
             goToDeleteButton = (ImageButton) itemView.findViewById(R.id.btnDaily_Delete);
             goToEdit = (ImageButton) itemView.findViewById(R.id.btnDaily_EditEvent);
