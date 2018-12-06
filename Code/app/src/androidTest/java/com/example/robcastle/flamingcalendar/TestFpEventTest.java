@@ -15,11 +15,11 @@ public class TestFpEventTest {
 
     @Before
     public void setUp() {
-        myUnit = new fpEvent("10/29/2018", "Birthday", "12:00am", "12:00pm", "Party");
-        myUnit2 = new fpEvent("10/29/2018", "Birthday", "12:00am", "12:00pm", "Party");
-        myUnit3 = new fpEvent("10/29/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting");
-        myUnit4 = new fpEvent("11/29/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting");
-        myUnit5 = new fpEvent("10/30/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting");
+        myUnit = new fpEvent("10/29/2018", "Birthday", "12:00am", "12:00pm", "Party", false);
+        myUnit2 = new fpEvent("10/29/2018", "Birthday", "12:00am", "12:00pm", "Party", false);
+        myUnit3 = new fpEvent("10/29/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting", false);
+        myUnit4 = new fpEvent("11/29/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting", false);
+        myUnit5 = new fpEvent("10/30/2019", "Manual Code Review", "11:00am", "2:00pm", "Meeting", false);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class TestFpEventTest {
     public void testsetStartTime() {
         myUnit.setStartTime("3:00pm");
         String result = myUnit.getStartTime();
-        assertEquals("2:00pm", result);
+        assertNotEquals("2:00pm", result);
     }
 
     @Test
