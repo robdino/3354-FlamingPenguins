@@ -16,8 +16,8 @@
 
 
         <RelativeLayout
-            android:layout_width="400dp"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="250dp"
             android:elevation="0dp"
             android:padding="16dp">
 
@@ -47,18 +47,18 @@
 
             <TextView
                 android:id="@+id/daily_description"
-                android:layout_width="240dp"
-                android:layout_height="50dp"
+                android:layout_width="182dp"
+                android:layout_height="52dp"
                 android:layout_below="@+id/daily_name"
                 android:layout_alignStart="@+id/daily_date"
                 android:layout_alignLeft="@+id/daily_date"
                 android:layout_alignEnd="@+id/daily_name"
                 android:layout_alignRight="@+id/daily_name"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginLeft="3dp"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginEnd="55dp"
+                android:layout_marginRight="55dp"
                 android:text="@string/cardDesc"
                 android:textSize="13sp" />
 
@@ -91,22 +91,41 @@
                 android:layout_alignBottom="@+id/daily_description"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginEnd="47dp"
-                android:layout_marginRight="47dp"
-                android:layout_marginBottom="0dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginBottom="11dp"
                 android:contentDescription="deleteEvent"
                 app:srcCompat="@android:drawable/ic_menu_delete" />
 
             <ImageButton
                 android:id="@+id/btnDaily_EditEvent"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignBottom="@+id/daily_description"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="-1dp"
-                android:layout_toStartOf="@+id/btnDaily_Delete"
+                android:layout_width="29dp"
+                android:layout_height="27dp"
+                android:layout_alignTop="@+id/btnDaily_Delete"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="104dp"
+                android:layout_marginRight="104dp"
+                android:layout_marginBottom="0dp"
                 android:contentDescription="editEvent"
                 app:srcCompat="@android:drawable/ic_menu_edit" />
+
+            <Switch
+                android:id="@+id/daily_reminder"
+                android:layout_width="92dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnDaily_Delete"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="-11dp"
+                android:layout_marginEnd="65dp"
+                android:layout_marginRight="65dp"
+                android:checked="false"
+                android:text="Reminder"
+                android:textSize="10sp"
+                tools:checked="false" />
 
         </RelativeLayout>
 
