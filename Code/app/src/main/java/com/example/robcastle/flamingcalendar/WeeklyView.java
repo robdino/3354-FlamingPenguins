@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
+import java.time.DayOfWeek;
+import java.time.temporal.WeekFields;
 import java.util.*;
 
 
@@ -27,7 +29,6 @@ public class WeeklyView extends AppCompatActivity
     }
 
     private DatabaseHelper mDatabaseHelper;
-
     private Button goToHome;
 
     @Override
@@ -65,8 +66,7 @@ public class WeeklyView extends AppCompatActivity
                 Intent intent5 = new Intent (WeeklyView.this, DailyView.class);
 
                 intent5.putExtra("extraInfo", true);
-                intent5.putExtra("specificID", str.getIDnum());
-
+                intent5.putExtra("date", str.getDate());
                 startActivity(intent5);
             }
         });

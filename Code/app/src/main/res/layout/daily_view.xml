@@ -7,18 +7,40 @@
     android:layout_height="match_parent"
     android:background="@drawable/penguin">
 
+    <TextView
+        android:id="@+id/dateHome3"
+        android:layout_width="367dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:lineSpacingExtra="12sp"
+        android:text="DD MONTH YYYY"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:fontFamily="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_width="match_parent"
-        android:layout_height="412dp"
+        android:layout_width="363dp"
+        android:layout_height="364dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/dateHome3">
+
+    </android.support.v7.widget.RecyclerView>
 
     <Button
         android:id="@+id/btnHome_Daily"

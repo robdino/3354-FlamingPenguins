@@ -4,25 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="100"
-    android:background="@drawable/penguin">
+    android:alpha= "0.5">
 
     <TextView
-        android:gravity="center"
-        android:textAlignment="center"
-        android:text="Date"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
         android:id="@+id/textView1"
-        android:layout_weight="35" />
-
-    <TextView
-        android:gravity="center"
-        android:textAlignment="center"
-        android:text="description"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_weight="35"
+        android:gravity="center"
+        android:text="Date"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/textView4"
-        android:layout_weight="25" />
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="25"
+        android:gravity="center"
+        android:text="description"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -31,19 +35,23 @@
         android:layout_weight="40">
 
         <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:gravity="center"
             android:text="startTime"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:id="@+id/textView2" />
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
         <TextView
-            android:gravity="center"
-            android:text="endTime"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:id="@+id/textView3"
-            android:layout_below="@id/textView2"/>
+            android:layout_below="@id/textView2"
+            android:gravity="center"
+            android:text="endTime"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

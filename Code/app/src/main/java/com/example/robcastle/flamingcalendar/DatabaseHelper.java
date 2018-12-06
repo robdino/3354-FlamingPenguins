@@ -169,6 +169,37 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
     /**
      * @author Robbie
+     * @since 11/20/18
+     * @return new eventList using date
+     */
+    public ArrayList<fpEvent> getDailyData(String date, String desc, String name)
+    {
+        ArrayList<fpEvent> eventList;
+
+        Cursor data;
+        data = getItemsForDate(date); //query for the data
+
+        eventList = parseData(data);
+
+        if(eventList.size() == 1)
+            return eventList;
+        else
+        {
+            for (int i = 0; i < eventList.size(); i++)
+            {
+                if(!eventList.get(i).getName().equals(name))
+                    eventList.remove(i);
+                else if(!eventList.get(i).getDescription().equals(desc))
+                    eventList.remove(i);
+                else
+                    Log.d(TAG, "Cannot separate: " + eventList.get(i).getName() + " from: " + name);
+            }
+        }
+        return eventList;
+    }
+
+    /**
+     * @author Robbie
      * @since 11/24/18
      * @return new eventList using IDnum
      */
@@ -245,24 +276,22 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
     /**
-     * Updates the name field
-     * @param newName
-     * @param id
-     * @param oldName
+     *
      */
-    /*
-    public void updateRecordDate(String newName, int id, String oldName){
+    public void updateRecord(fpEvent item){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + TABLE_NAME + " SET " + COL1 +
-                " = '" + newName + "' WHERE " + COL0 + " = '" + id + "'" +
-                " AND " + COL1 + " = '" + oldName + "'";
-        Log.d(TAG, "updateName: query: " + query);
-        Log.d(TAG, "updateName: Setting name to " + newName);
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + DATE + " = '" + item.getDate() + "'"
+                + " AND " + DESC + " = '" + item.getDescription() + "'";
+
+        Log.d(TAG, "deleteName: query: " + query);
+        Log.d(TAG, "deleteName: Deleting " + item.getName() + " from database.");
         db.execSQL(query);
+
+        addData(item);
     }
 
 
-    *//**
+    /**
      * Delete from database
      * @param
      * @param
@@ -277,6 +306,15 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL(query);
     }
 
+
+    public void deleteRecord(final int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + "IDnum" + " = '" + id + "'";
+
+        Log.d(TAG, "deleteName: query: " + query);
+        Log.d(TAG, "deleteName: Deleting " + id + " from database.");
+        db.execSQL(query);
+    }
 
 }
 

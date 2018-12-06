@@ -48,6 +48,7 @@ import java.util.Random;
      private Button goToHome;
      private Button addEventButton;
      private DatePickerDialog.OnDateSetListener dateSetListener;
+     private boolean receivingInfo;
 
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
      boolean reminder = false;
@@ -58,30 +59,74 @@ import java.util.Random;
      Button endTimeInput;
      Switch addReminder;
      DatabaseHelper mDatabaseHelper;
+   
      NotificationCompat.Builder notification;
      Random random = new Random();
      int uniqueID = random.nextInt(9999-1000) + 1000;
      //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+    ArrayList<fpEvent> item;
+
+    /**
+     * @author Robbbie, Anthony, and Taylor
+     * @return void
+     * This function deals with the onClickListener of all the buttons and editText fields
+     * of of the addEventActivity class
+     * @since 12/04/18
+     */
 
      @Override
       protected void onCreate(@Nullable Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.add_event_screen);
          Log.d(TAG, "onCreate, Add Event");
-
          mDatabaseHelper = new DatabaseHelper(this);
          notification = new NotificationCompat.Builder(this, "M_CH_ID");
          notification.setAutoCancel((true));
 //         Intent notifyIntent = new Intent(ACTION_NOTIFY);
 //         final PendingIntent notifyPendingIntent = PendingIntent.getBroadcast(this, uniqueID, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+         receivingInfo = false;
          generateButtons();
+
+         Intent incomingIntent1 = getIntent();
+         receivingInfo = incomingIntent1.getBooleanExtra("gettingInfo", receivingInfo);
+
+         if(receivingInfo)
+         {
+             String name, date, desc;
+             name = incomingIntent1.getStringExtra("name");
+             date = incomingIntent1.getStringExtra("date");
+             desc = incomingIntent1.getStringExtra("desc");
+
+             //we will pull info from DB
+             item = mDatabaseHelper.getDailyData(date, desc, name);
+
+             dateInput.setText(item.get(0).getDate());
+             dateEvent = item.get(0).getDate();
+
+             eventNameInput.setText(item.get(0).getName());
+             eventName = item.get(0).getName();
+
+             descriptionInput.setText(item.get(0).getDescription());
+             descriptionEvent = item.get(0).getDescription();
+
+             startTimeInput.setText(item.get(0).getStartTime());
+             startTime = item.get(0).getStartTime();
+
+             endTimeInput.setText(item.get(0).getEndTime());
+             endTime = item.get(0).getEndTime();
+         }
 
      addEventButton.setOnClickListener(new View.OnClickListener () {
      @Override
      public void onClick(View v)
          {
              Log.d(TAG, "onCreate, Adding event");
+
+             if(receivingInfo) {
+                 mDatabaseHelper.deleteRecord(item.get(0).getIDnum());
+                 receivingInfo = false;
+             }
 
              getEventStrings();
 
@@ -148,7 +193,9 @@ import java.util.Random;
                  mTimePicker = new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
                      @Override
                      public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                         startTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                         int hour = selectedHour % 12;
+                         startTimeInput.setText(String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
+                                 selectedMinute, selectedHour < 12 ? "am" : "pm"));
                      }
                  }, hour, minute, false);//Yes 24 hour time
                  mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -167,7 +214,9 @@ import java.util.Random;
                  mTimePicker = new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
                      @Override
                      public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                         endTimeInput.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
+                         int hour = selectedHour % 12;
+                         endTimeInput.setText(String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
+                                 selectedMinute, selectedHour < 12 ? "am" : "pm"));
                      }
                  }, hour, minute, false);//Yes 24 hour time
                  mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -209,6 +258,7 @@ import java.util.Random;
          @Override
          public void onClick(View v)
          {
+             receivingInfo = false;
              Log.d(TAG, "onCreate, Going to HomeScreen View");
              Intent intent4 = new Intent(AddEventActivity.this, HomeScreen.class);
              startActivity(intent4);
