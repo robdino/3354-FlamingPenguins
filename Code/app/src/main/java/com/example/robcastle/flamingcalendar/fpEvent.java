@@ -1,9 +1,5 @@
 package com.example.robcastle.flamingcalendar;
 
-import android.content.Intent;
-
-import java.util.Calendar;
-
 /**
  * We need to implement the following functions:
  *
@@ -25,18 +21,16 @@ public class fpEvent implements Comparable<fpEvent>
     private String startTime;
     private String endTime;
     private String name;
-    private boolean reminder;
     private int IDnum;  //ID integer assigned by the database
 
     /****************CONSTRUCTORS********************/
-    public fpEvent(String date, String description, String startTime, String endTime, String name,boolean reminder)
+    public fpEvent(String date, String description, String startTime, String endTime, String name)
     {
         this.date = date;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.name = name;
-        this.reminder = reminder;
         this.IDnum = -1;    //-1 Means there is no ID num
     }
 
@@ -48,7 +42,7 @@ public class fpEvent implements Comparable<fpEvent>
             this.description.equals(anotherEvent.getDescription()) &&
             this.name.equals(anotherEvent.getName()) &&
             this.startTime.equals(anotherEvent.getStartTime()) &&
-            this.endTime.equals(anotherEvent.getEndTime())){
+            this.endTime.equals(anotherEvent.getEndTime()) ){
             return true;
         }
         else{
@@ -153,26 +147,6 @@ public class fpEvent implements Comparable<fpEvent>
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Boolean getReminderCheck() {
-        return reminder;
-    }
-
-    public Intent setReminder() {
-        Calendar cal = Calendar.getInstance();
-        Intent intent = new Intent(Intent.ACTION_EDIT);
-        intent.setType("vdn.android.cursor.item/event");
-        intent.putExtra("beginTime", cal.getTimeInMillis());
-        intent.putExtra("allDay", false);
-        intent.putExtra("rrule", "FREQ=DAILY");
-        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
-        intent.putExtra("title", "A Test Event from android app");
-        return intent;
-    }
-
-    public void setReminderCheck(boolean reminder) {
-        this.reminder = reminder;
     }
 
     public int getIDnum() { return IDnum; }

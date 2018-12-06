@@ -1,36 +1,19 @@
 package com.example.robcastle.flamingcalendar;
 
-import android.app.AlarmManager;
-import android.app.Application;
 import android.app.DatePickerDialog;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Build;
-import android.os.SystemClock;
-import android.provider.AlarmClock;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.content.BroadcastReceiver;
 import android.os.Bundle;;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+ import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
 
 /**
  *@author Anthony Huynh
@@ -42,8 +25,6 @@ import java.util.Random;
  *
  */
  public class AddEventActivity extends AppCompatActivity {
-    private static final String ACTION_NOTIFY =
-            "com.example.android.standup.ACTION_NOTIFY";
      private static final String TAG = "AddEventActivity";
      private Button goToHome;
      private Button addEventButton;
@@ -51,19 +32,13 @@ import java.util.Random;
      private boolean receivingInfo;
 
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
-     boolean reminder = false;
      EditText eventNameInput;
      EditText descriptionInput;
      Button dateInput;
      Button startTimeInput;
      Button endTimeInput;
-     Switch addReminder;
      DatabaseHelper mDatabaseHelper;
-   
-     NotificationCompat.Builder notification;
-     Random random = new Random();
-     int uniqueID = random.nextInt(9999-1000) + 1000;
-     //AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
     ArrayList<fpEvent> item;
 
     /**
@@ -80,11 +55,6 @@ import java.util.Random;
          setContentView(R.layout.add_event_screen);
          Log.d(TAG, "onCreate, Add Event");
          mDatabaseHelper = new DatabaseHelper(this);
-         notification = new NotificationCompat.Builder(this, "M_CH_ID");
-         notification.setAutoCancel((true));
-//         Intent notifyIntent = new Intent(ACTION_NOTIFY);
-//         final PendingIntent notifyPendingIntent = PendingIntent.getBroadcast(this, uniqueID, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
          receivingInfo = false;
          generateButtons();
 
@@ -132,19 +102,8 @@ import java.util.Random;
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
 
-             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName, reminder);
-
+             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName);
              eventList.add(newEvent);
-             if(reminder == true) {
-
-                 btnGoToNotificationClicked(newEvent.getName(), newEvent.getDescription());
-                 Context context = getApplicationContext();
-                 CharSequence text = "Reminder Created";
-                 int duration = Toast.LENGTH_SHORT;
-
-                 Toast toast = Toast.makeText(context, text, duration);
-                 toast.show();
-             }
              mDatabaseHelper.addData(newEvent);
 
              Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
@@ -226,33 +185,6 @@ import java.util.Random;
 
 
 
-         addReminder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-             @Override
-             public void onCheckedChanged(CompoundButton cb, boolean on) {
-                 //Log.d(TAG, "onCreate, Reminder Switch Changed");
-                 if (on) {
-//                     long triggerTime = SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_FIFTEEN_MINUTES;
-//                     long repeatInterval = AlarmManager.INTERVAL_FIFTEEN_MINUTES;
-//                     alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, repeatInterval, notifyPendingIntent);
-                     Context context = getApplicationContext();
-                     CharSequence text = "Reminder ON";
-                     int duration = Toast.LENGTH_SHORT;
-
-                     Toast toast = Toast.makeText(context, text, duration);
-                     toast.show();
-                 }
-                 else {
-//                     alarmManager.cancel(notifyPendingIntent);
-                     Context context = getApplicationContext();
-                     CharSequence text = "Reminder OFF";
-                     int duration = Toast.LENGTH_SHORT;
-
-                     Toast toast = Toast.makeText(context, text, duration);
-                     toast.show();
-                 }
-             }
-         });
-
 
      goToHome.setOnClickListener(new View.OnClickListener () {
          @Override
@@ -285,7 +217,6 @@ import java.util.Random;
          dateEvent = dateInput.getText().toString();
          startTime = startTimeInput.getText().toString();
          endTime = endTimeInput.getText().toString();
-         reminder = addReminder.isChecked();
      }
 
     /**
@@ -305,48 +236,9 @@ import java.util.Random;
          dateInput = (Button) findViewById(R.id.dateInput);
          startTimeInput = (Button) findViewById(R.id.startTimeInput);
          endTimeInput = (Button) findViewById(R.id.endTimeInput);
-         addReminder = (Switch) findViewById(R.id.addReminder);
      }
 
-    public void btnGoToNotificationClicked(/*View view,*/ String eventName, String eventDesc) {
-        notification.setSmallIcon(R.drawable.flamingpenguin);
-        notification.setTicker("This is the ticker");
 
-        notification.setWhen(System.currentTimeMillis());
-        notification.setShowWhen(true);
-        notification.setContentTitle(eventName);
-        notification.setContentText(eventDesc);
-        //notification.build();
-        Intent intent = new Intent(this, HomeScreen.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        notification.setContentIntent(pendingIntent);
-//        long delay = 10000;
-//        long futureInMillis = SystemClock.elapsedRealtime() + delay;
-//        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-
-        NotificationManagerCompat nmc = NotificationManagerCompat.from(this);
-        createNotificationChannel();
-        System.out.println("Notifying User...");
-        nmc.notify(uniqueID, notification.build());
-    }
-
-    public void createNotificationChannel(){
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "M_CH_ID";//getString(R.string.channel_name);
-            String description = "M_CH_ID";//getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("M_CH_ID", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
  }
 
