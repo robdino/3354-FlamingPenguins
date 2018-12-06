@@ -51,27 +51,27 @@ public class TestFpEventTest {
     @Test
     public void testgetStartTime() {
         String result = myUnit.getStartTime();
-        assertEquals("12:00am", result);
+        assertEquals("12:00 am", result);
     }
 
     @Test
     public void testsetStartTime() {
-        myUnit.setStartTime("3:00pm");
+        myUnit.setStartTime("3:00 pm");
         String result = myUnit.getStartTime();
-        assertNotEquals("2:00pm", result);
+        assertNotEquals("2:00 pm", result);
     }
 
     @Test
     public void testgetEndTime() {
         String result = myUnit.getEndTime();
-        assertEquals("12:00pm", result);
+        assertEquals("12:00 pm", result);
     }
 
     @Test
     public void testsetEndTime() {
-        myUnit.setEndTime("2:00pm");
+        myUnit.setEndTime("2:00 pm");
         String result = myUnit.getEndTime();
-        assertEquals("2:00pm", result);
+        assertEquals("2:00 pm", result);
     }
 
     @Test
