@@ -19,6 +19,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.*;
 
 import java.text.ParseException;
@@ -42,6 +44,8 @@ import java.util.concurrent.TimeUnit;
  */
  public class AddEventActivity extends AppCompatActivity {
 
+
+    /**Constants for notification timer delay in scheduler method*/
      public static final long MIN_DELAY_BY_30 = 1200000;
      public static final long MIN_DELAY_BY_15 =  900000;
      public static final long MIN_DELAY_BY_10 =  600000;
@@ -63,10 +67,9 @@ import java.util.concurrent.TimeUnit;
      Button endTimeInput;
      DatabaseHelper mDatabaseHelper;
      Switch ReminderSwitch;
-    ArrayList<fpEvent> item;
+     ArrayList<fpEvent> item;
 
     NotificationCompat.Builder notification;
-
     Random random = new Random();
     int uniqueID = random.nextInt(9999-1000) + 1000;
 
@@ -77,22 +80,31 @@ import java.util.concurrent.TimeUnit;
      * of of the addEventActivity class
      * :: added setOnCheckedChangeListener/onCheckChanged function to notify user with small popup
      * :: Toast message, whether ReminderSwitch is turned on or off
+     * :: Fullscreen allows notification to appear as a heads-up notification
      * @since 12/04/18 :: 12/07/18
      */
 
      @Override
       protected void onCreate(@Nullable Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
+         /********************************Notification Instantiation********************************/
+         notification = new NotificationCompat.Builder(this, "M_CH_ID");
+         notification.setAutoCancel((true));
+         Intent intent=getIntent();
+         boolean isFullScreen =  intent.getBooleanExtra("isFullScreen", false);
+
+         if(isFullScreen )
+         {
+             requestWindowFeature(Window.FEATURE_NO_TITLE);
+             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
+         }
          setContentView(R.layout.add_event_screen);
          Log.d(TAG, "onCreate, Add Event");
          mDatabaseHelper = new DatabaseHelper(this);
          receivingInfo = false;
          generateButtons();
-         /********************************Notification Instantiation********************************/
-         notification = new NotificationCompat.Builder(this, "M_CH_ID");
-         notification.setAutoCancel((true));
-
-         Log.d(TAG,"End of onCreate>btnGoToNotificationClicked");
+         Log.d(TAG,"End of onCreate>sendNotification");
 
          /**********************************REMINDER TOAST******************************************/
          if (ReminderSwitch != null) {
@@ -188,7 +200,7 @@ import java.util.concurrent.TimeUnit;
 //             long dateTimeInLong = myDate.getTime();
 //             System.out.println("date time in long equals to " + dateTimeInLong);
 //             long timeDelayForReminder = dateTimeInLong - (dateTimeInLong - MIN_DELAY_BY_1);
-
+             /******************************Notification timer delay******************************/
              ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
              scheduler.scheduleWithFixedDelay(new Runnable() {
                  @Override
@@ -334,7 +346,14 @@ import java.util.concurrent.TimeUnit;
          ReminderSwitch = (Switch) findViewById(R.id.ReminderSwitch);
      }
 
-    public void sendNotification(String eventName, String eventDesc) {
+    /** Notification method with eventName and eventDescription, requiring notification channel and uniqueID
+     *  to behave a certain way. Added full screen intent to notification to pop up as a heads-up notification
+     *
+     * @param eventName
+     * @param eventDesc
+     */
+     public void sendNotification(String eventName, String eventDesc) {
+
         notification.setSmallIcon(R.drawable.flamingpenguin);
         notification.setTicker("This is the ticker");
 
@@ -344,6 +363,7 @@ import java.util.concurrent.TimeUnit;
         notification.setContentText(eventDesc);
 
         Intent intent = new Intent(this, HomeScreen.class);
+        intent.putExtra("isFullScreen", true);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
@@ -352,20 +372,24 @@ import java.util.concurrent.TimeUnit;
         createNotificationChannel();
         System.out.println("Notifying User...");
         nmc.notify(uniqueID, notification.build());
-            Handler h = new Handler();
-            long delayInMilliseconds = 5000;
-            h.postDelayed(new Runnable() {
-                public void run() {
+
+        /**Without this method, the notification would be repeating every so often*/
+        Handler h = new Handler();
+        long delayInMilliseconds = 5000;
+        h.postDelayed(new Runnable() {
+            public void run() {
                     nmc.cancel(uniqueID);
                 }
             }, 5000);
     }
-
+     /**A notification requires a channel to modify how a notification behaves*/
      public void createNotificationChannel(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "M_CH_ID";//getString(R.string.channel_name);
             String description = "M_CH_ID";//getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            /**IMPORTANCE_HIGH sets notification as a heads-up notification*/
+            int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel channel = new NotificationChannel("M_CH_ID", name, importance);
             channel.setDescription(description);
 
