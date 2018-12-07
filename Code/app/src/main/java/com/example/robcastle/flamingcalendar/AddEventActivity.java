@@ -1,13 +1,19 @@
 package com.example.robcastle.flamingcalendar;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,10 +21,15 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
 
-import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.Date;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *@author Anthony Huynh
@@ -30,6 +41,13 @@ import java.util.Calendar;
  *
  */
  public class AddEventActivity extends AppCompatActivity {
+
+     public static final long MIN_DELAY_BY_30 = 1200000;
+     public static final long MIN_DELAY_BY_15 =  900000;
+     public static final long MIN_DELAY_BY_10 =  600000;
+     public static final long MIN_DELAY_BY_5  =  300000;
+     public static final long MIN_DELAY_BY_1 =    60000;
+
      private static final String TAG = "AddEventActivity";
      private Button goToHome;
      private Button addEventButton;
@@ -46,6 +64,11 @@ import java.util.Calendar;
      DatabaseHelper mDatabaseHelper;
      Switch ReminderSwitch;
     ArrayList<fpEvent> item;
+
+    NotificationCompat.Builder notification;
+
+    Random random = new Random();
+    int uniqueID = random.nextInt(9999-1000) + 1000;
 
     /**
      * @author Robbbie, Anthony, Taylor :: Geoffrey
@@ -65,6 +88,13 @@ import java.util.Calendar;
          mDatabaseHelper = new DatabaseHelper(this);
          receivingInfo = false;
          generateButtons();
+         /********************************Notification Instantiation********************************/
+         notification = new NotificationCompat.Builder(this, "M_CH_ID");
+         notification.setAutoCancel((true));
+
+         Log.d(TAG,"End of onCreate>btnGoToNotificationClicked");
+
+         /**********************************REMINDER TOAST******************************************/
          if (ReminderSwitch != null) {
              ReminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                  @Override
@@ -135,9 +165,38 @@ import java.util.Calendar;
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
 
-             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName, reminder);
-
+             final fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName, reminder);
              eventList.add(newEvent);
+             Context context = getApplicationContext();
+             int duration = Toast.LENGTH_LONG;
+             CharSequence text = "Reminder will notify in 10 seconds";
+             Toast toast = Toast.makeText(context, text, duration);
+             toast.show();
+//             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy h:mm a");
+//             Date myDate = new Date();
+//             try {
+//                 String startTimeForReminder = newEvent.getStartTime();
+//                 context = getApplicationContext();
+//                 duration = Toast.LENGTH_LONG;
+//                 toast = Toast.makeText(context, startTimeForReminder, duration);
+//                 toast.setGravity(Gravity.TOP, 0, 0);
+//                 toast.show();
+//                 myDate = sdf.parse(startTimeForReminder);
+//             } catch (ParseException e) {
+//                 Log.d(TAG, "Error parsing String time to date time");
+//             }
+//             long dateTimeInLong = myDate.getTime();
+//             System.out.println("date time in long equals to " + dateTimeInLong);
+//             long timeDelayForReminder = dateTimeInLong - (dateTimeInLong - MIN_DELAY_BY_1);
+
+             ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+             scheduler.scheduleWithFixedDelay(new Runnable() {
+                 @Override
+                 public void run() {
+                     sendNotification(newEvent.getName(), newEvent.getDescription());
+                 }
+             }, 10 , 10, TimeUnit.SECONDS);
+
              mDatabaseHelper.addData(newEvent);
 
              Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
@@ -258,7 +317,8 @@ import java.util.Calendar;
      * @return void
      * This function is just to make the .onCreate() function easier to read.
      * We build our buttons here
-     * :: added ReminderSwitch button
+     * :: added ReminderSwitch button, sendNotification(String eventName, String eventDesc)
+     * :: createNotificationChannel() functions
      * @since 11/15/18 :: 12/07/18
      */
      void generateButtons()
@@ -274,9 +334,47 @@ import java.util.Calendar;
          ReminderSwitch = (Switch) findViewById(R.id.ReminderSwitch);
      }
 
+    public void sendNotification(String eventName, String eventDesc) {
+        notification.setSmallIcon(R.drawable.flamingpenguin);
+        notification.setTicker("This is the ticker");
+
+        notification.setWhen(System.currentTimeMillis());
+        notification.setShowWhen(true);
+        notification.setContentTitle(eventName);
+        notification.setContentText(eventDesc);
+
+        Intent intent = new Intent(this, HomeScreen.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        final NotificationManagerCompat nmc = NotificationManagerCompat.from(this);
+        createNotificationChannel();
+        System.out.println("Notifying User...");
+        nmc.notify(uniqueID, notification.build());
+            Handler h = new Handler();
+            long delayInMilliseconds = 5000;
+            h.postDelayed(new Runnable() {
+                public void run() {
+                    nmc.cancel(uniqueID);
+                }
+            }, 5000);
+    }
+
+     public void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "M_CH_ID";//getString(R.string.channel_name);
+            String description = "M_CH_ID";//getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("M_CH_ID", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+}
 
 
 
-
- }
 
