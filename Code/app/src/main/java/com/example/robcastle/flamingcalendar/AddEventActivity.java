@@ -2,18 +2,23 @@ package com.example.robcastle.flamingcalendar;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
 
- import java.util.ArrayList;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Calendar;
+
 
 /**
  *@author Anthony Huynh
@@ -32,21 +37,24 @@ import java.util.Calendar;
      private boolean receivingInfo;
 
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
+     int reminder;
      EditText eventNameInput;
      EditText descriptionInput;
      Button dateInput;
      Button startTimeInput;
      Button endTimeInput;
      DatabaseHelper mDatabaseHelper;
-
+     Switch ReminderSwitch;
     ArrayList<fpEvent> item;
 
     /**
-     * @author Robbbie, Anthony, and Taylor
+     * @author Robbbie, Anthony, Taylor :: Geoffrey
      * @return void
      * This function deals with the onClickListener of all the buttons and editText fields
      * of of the addEventActivity class
-     * @since 12/04/18
+     * :: added setOnCheckedChangeListener/onCheckChanged function to notify user with small popup
+     * :: Toast message, whether ReminderSwitch is turned on or off
+     * @since 12/04/18 :: 12/07/18
      */
 
      @Override
@@ -57,7 +65,29 @@ import java.util.Calendar;
          mDatabaseHelper = new DatabaseHelper(this);
          receivingInfo = false;
          generateButtons();
-
+         if (ReminderSwitch != null) {
+             ReminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                 @Override
+                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                     Context context = getApplicationContext();
+                     CharSequence text;
+                     int duration = Toast.LENGTH_SHORT;
+                     if(isChecked) {
+                         //do stuff when Switch is ON
+                         reminder = 1;
+                         text = "Reminder ON";
+                         Toast toast = Toast.makeText(context, text, duration);
+                         toast.show();
+                     } else {
+                         //do stuff when Switch if OFF
+                         reminder = 0;
+                         text = "Reminder OFF";
+                         Toast toast = Toast.makeText(context, text, duration);
+                         toast.show();
+                     }
+                 }
+             });
+         }
          Intent incomingIntent1 = getIntent();
          receivingInfo = incomingIntent1.getBooleanExtra("gettingInfo", receivingInfo);
 
@@ -85,6 +115,9 @@ import java.util.Calendar;
 
              endTimeInput.setText(item.get(0).getEndTime());
              endTime = item.get(0).getEndTime();
+
+             ReminderSwitch.setChecked(item.get(0).getBoolReminder());
+             reminder = item.get(0).getReminder();
          }
 
      addEventButton.setOnClickListener(new View.OnClickListener () {
@@ -102,7 +135,8 @@ import java.util.Calendar;
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
 
-             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName);
+             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName, reminder);
+
              eventList.add(newEvent);
              mDatabaseHelper.addData(newEvent);
 
@@ -220,11 +254,12 @@ import java.util.Calendar;
      }
 
     /**
-     * @author Robbbie
+     * @author Robbbie :: Geoffrey
      * @return void
      * This function is just to make the .onCreate() function easier to read.
-     * We build our buttons here.
-     * @since 11/15/18
+     * We build our buttons here
+     * :: added ReminderSwitch button
+     * @since 11/15/18 :: 12/07/18
      */
      void generateButtons()
      {
@@ -236,7 +271,10 @@ import java.util.Calendar;
          dateInput = (Button) findViewById(R.id.dateInput);
          startTimeInput = (Button) findViewById(R.id.startTimeInput);
          endTimeInput = (Button) findViewById(R.id.endTimeInput);
+         ReminderSwitch = (Switch) findViewById(R.id.ReminderSwitch);
      }
+
+
 
 
 

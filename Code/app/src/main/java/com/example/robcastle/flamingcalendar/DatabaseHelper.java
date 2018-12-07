@@ -18,8 +18,9 @@ import java.util.Date;
  * An associated YouTube video about the API: https://www.youtube.com/watch?v=aQAIMY-HzL8
  * I did some modifications to the class to make it work with our stuff.
  *
- * @author Robbie
- * @since 11/12/18
+ * @author Robbie :: Geoffrey
+ * :: mainly added REMINDER components to DatabaseHelper, SQL_TABLE, to parseData() and addData()
+ * @since 11/12/18 :: 12/07/18
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper
@@ -31,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     private static final String START       = "STARTTIME";
     private static final String END         = "ENDTIME";
     private static final String NAME        = "NAME";
+    private static final String REMINDER    = "REMINDER";
 
 
     public DatabaseHelper(Context context) {
@@ -49,7 +51,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 "STARTTIME VARCHAR(45) NOT NULL, " +
                 "ENDTIME VARCHAR(45) NOT NULL, " +
                 "NAME VARCHAR(45) NOT NULL, " +
+                "REMINDER INTEGER NOT NULL, " +
                 "IDnum INTEGER PRIMARY KEY)";
+
         db.execSQL(createTable);
         Log.d(TAG, "onCreate: SQL database: making new db file");
     }
@@ -88,6 +92,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         values.put("STARTTIME",     item.getStartTime()     );
         values.put("ENDTIME",       item.getEndTime()       );
         values.put("NAME",          item.getName()          );
+        values.put("REMINDER",      item.getReminder()      );
 
         //log - for testing purposes - what we plan to do
         Log.d(TAG, "addData: Adding " + values.toString() + " to " + TABLE_NAME);
@@ -229,9 +234,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
     }
 
     /**
-     * @author Robbie
-     * @since 11/24/18
-     * @return new eventList with parsed data
+     * @author Robbie :: Geoffrey
+     * @since 11/24/18 :: 12/07/18
+     * @return new eventList with parsed data :: and reminder data
      */
     private ArrayList<fpEvent> parseData(Cursor data)
     {
@@ -242,17 +247,19 @@ public class DatabaseHelper extends SQLiteOpenHelper
         for(int i = 0; i < recordNum; i++)
         {
             data.moveToNext(); //Index starts at -1, so we moveToNext() so it starts from element 0
-
             fpEvent newEvent = new fpEvent(
                     data.getString(0), //DATE
                     data.getString(1), //DESCRIPTION
                     data.getString(2), //START TIME
                     data.getString(3), //END TIME
-                    data.getString(4)  //NAME
+                    data.getString(4), //NAME
+                    data.getInt(5)     //REMINDER
             );
-
-            int id = Integer.parseInt( data.getString(5) ); //IDnum
+//            int reminder = Integer.parseInt(data.getString(5) ); //REMINDER
+//            newEvent.setReminder(reminder);
+            int id = Integer.parseInt( data.getString(6) );      //IDnum
             newEvent.setIDnum(id);
+
 
             Log.d(TAG, "parseData:" +
                     " Date: "           + newEvent.getDate() +
@@ -260,6 +267,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                     " Start Time: "     + newEvent.getStartTime() +
                     " End Time: "       + newEvent.getEndTime() +
                     " Name: "           + newEvent.getName() +
+                    " Reminder: "       + newEvent.getReminder() +
                     " IDnum: "          + newEvent.getIDnum()
             );
 

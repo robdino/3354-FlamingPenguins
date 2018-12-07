@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import java.util.ArrayList;
 import android.app.AlertDialog;
@@ -60,6 +61,7 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         eventLoader.eventDesc.setText(dailyEvents.get(i).getDescription());
         eventLoader.eventStart.setText(dailyEvents.get(i).getStartTime());
         eventLoader.eventEnd.setText(dailyEvents.get(i).getEndTime());
+        //eventLoader.reminderSwitch.setChecked(dailyEvents.get(i).getBoolReminder());
     }
 
     @Override
@@ -80,6 +82,7 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         TextView eventEnd;
         ImageButton goToDeleteButton;
         ImageButton goToEdit;
+        //Switch reminderSwitch;
 
         DailyEventHolder(final View itemView) {
             super(itemView);
