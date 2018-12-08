@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import java.util.ArrayList;
 import android.app.AlertDialog;
@@ -60,6 +61,7 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         eventLoader.eventDesc.setText(dailyEvents.get(i).getDescription());
         eventLoader.eventStart.setText(dailyEvents.get(i).getStartTime());
         eventLoader.eventEnd.setText(dailyEvents.get(i).getEndTime());
+        //eventLoader.reminderSwitch.setChecked(dailyEvents.get(i).getBoolReminder());
     }
 
     @Override
@@ -85,7 +87,6 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
             super(itemView);
             generateInfo();
 
-            //WORK ON THIS
             //just delete from SQL records and refresh
             goToDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -113,7 +114,6 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
                 }
             });
 
-            //WORK ON THIS
             //display old records, delete old record from sql db, and save new one
             goToEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
