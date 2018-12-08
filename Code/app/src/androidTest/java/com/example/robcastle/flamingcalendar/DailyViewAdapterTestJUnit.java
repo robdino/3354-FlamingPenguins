@@ -19,9 +19,9 @@ public class DailyViewAdapterTestJUnit {
     public void setup() {
         testEventList = new ArrayList<>();
         tester = new DailyViewAdapter(testEventList);
-        testFpEventA = new fpEvent("12/11/2018", "he was number one", "2:00pm", "4:00pm", "Smitty Webenjagermangensen memorial");
-        testFpEventB = new fpEvent("12/20/2018", "plays the xylophone", "7:00pm", "10:00pm", "Patrick Moore concert");
-        testFpEventC = new fpEvent("12/25/2018", "Badger Badger mushroom", "12:00am", "2:00am", "Mushrooms Picking");
+        testFpEventA = new fpEvent("12/11/2018", "he was number one", "2:00pm", "4:00pm", "Smitty Webenjagermangensen memorial",0 );
+        testFpEventB = new fpEvent("12/20/2018", "plays the xylophone", "7:00pm", "10:00pm", "Patrick Moore concert",0 );
+        testFpEventC = new fpEvent("12/25/2018", "Badger Badger mushroom", "12:00am", "2:00am", "Mushrooms Picking",0 );
     }
 
     /**JUnit test methods to test GetItemCount().*/

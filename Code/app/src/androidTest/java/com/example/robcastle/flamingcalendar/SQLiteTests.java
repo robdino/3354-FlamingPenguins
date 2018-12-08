@@ -2,9 +2,9 @@ package com.example.robcastle.flamingcalendar;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,76 +16,86 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import static android.support.test.InstrumentationRegistry.getTargetContext;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 /**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * ALL TESTS MUST BE RUN IN SEQUENCE
+ * @author Robbie
+ * @since 12/7/18
  */
+
 @RunWith(AndroidJUnit4.class)
 public class SQLiteTests {
 
-    private DatabaseHelper mDatabaseHelper;
+    private DatabaseHelper database;
     fpEvent myUnit;
     fpEvent myUnit2;
     fpEvent myUnit3;
 
-    private Context context;
     private int size = 0;
-    private SQLiteDatabase db;
 
     @Before
-    public void setup() {
-        context = InstrumentationRegistry.getContext();
-        mDatabaseHelper = new DatabaseHelper(this.context);
-        myUnit = new fpEvent("12/6/18", "Demo for the class", "1:00 pm", "2:00 pm", "Demo");
+    public void setUp() throws Exception {
+        getTargetContext().deleteDatabase(DatabaseHelper.TABLE_NAME);
+        database = new DatabaseHelper(getTargetContext());
+
+        myUnit = new fpEvent("12/6/18", "Demo for the class", "1:00 pm", "2:00 pm", "Demo",0 );
         myUnit2 = new fpEvent("11/7/18", "Some random November day", "3:00 pm",
-                                "4:00 pm", "No Shave November");
+                                "4:00 pm", "No Shave November",0 );
         myUnit3 = new fpEvent("12/15/18", "King of the Sea",
-                            "7:00 pm", "10:00 pm", "Aquaman");
+                            "7:00 pm", "10:00 pm", "Aquaman",0 );
     }
 
-    @Test
-    public void testOpenDB() {
-        db = mDatabaseHelper.getWritableDatabase();
-        assertTrue(db.isOpen());
+    @After
+    public void tearDown() throws Exception {
+        database.close();
     }
 
     @Test
     public void testAddEvent() {
-        boolean result =  mDatabaseHelper.addData(myUnit);
+        boolean result =  database.addData(myUnit);
+        size++;
         Assert.assertTrue(result);
     }
 
     @Test
-    public void testGetSizeAfterAddEvent() {
-        ArrayList<fpEvent> data = mDatabaseHelper.loadWeeklyEventList();
-        assertEquals(data.size(), size + 1);
-        size++;
+    public void testGetSizeAfterAdd1Event() {
+        ArrayList<fpEvent> data = database.loadWeeklyEventList();
+        assertEquals(size, data.size());
+
     }
 
     @Test
     public void testAddSecondEvent() {
-        boolean result =  mDatabaseHelper.addData(myUnit2);
+        boolean result =  database.addData(myUnit2);
+        size++;
         Assert.assertTrue(result);
     }
 
 
     @Test
     public void testAddThirdEvent() {
-        boolean result =  mDatabaseHelper.addData(myUnit3);
+        boolean result =  database.addData(myUnit3);
+        size++;
         Assert.assertTrue(result);
     }
 
     @Test
     public void testGetSizeAfterAdd3Events() {
-        ArrayList<fpEvent> data = mDatabaseHelper.loadWeeklyEventList();
-        assertEquals(data.size(), size + 2);
-        size += 2;
+        ArrayList<fpEvent> data = database.loadWeeklyEventList();
+        assertEquals(size, data.size());
     }
 
     @Test
-    public void testCloseDB() {
-        db.close();
-        assertFalse(db.isOpen());
+    public void testDelete2Events() {
+        database.addData(myUnit);
+        database.addData(myUnit2);
+
+        database.deleteRecord(myUnit2.getName(), myUnit2.getDate(), myUnit2.getDescription());
+        ArrayList<fpEvent> data = database.loadWeeklyEventList();
+        assertEquals(1, data.size());
     }
+
 }

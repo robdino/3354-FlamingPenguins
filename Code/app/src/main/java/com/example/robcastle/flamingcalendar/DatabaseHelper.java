@@ -26,7 +26,7 @@ import java.util.Date;
 public class DatabaseHelper extends SQLiteOpenHelper
 {
     private static final String TAG         = "DatabaseHelper";
-    private static final String TABLE_NAME  = "event_table";
+    public  static final String TABLE_NAME  = "event_table";
     private static final String DATE        = "DATE";
     private static final String DESC        = "DESCRIPTION";
     private static final String START       = "STARTTIME";

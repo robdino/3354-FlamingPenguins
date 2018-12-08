@@ -27,37 +27,37 @@ public class TestCompareToAndEqualToTest {
 
     @Before
     public void setUp() {
-        myUnit = new fpEvent("12/11/2018", "SE Final Day", "1:00 pm", "2:00 pm", "Poison");
-        myUnit2 = new fpEvent("12/10/2018", "After Final", "12:00 am", "12:00 pm", "Party");
-        myUnit3 = new fpEvent("12/12/2018", "Before Final", "12:00 am", "12:00 pm", "Suffering");
+        myUnit = new fpEvent("12/11/2018", "SE Final Day", "1:00 pm", "2:00 pm", "Poison", 0);
+        myUnit2 = new fpEvent("12/10/2018", "After Final", "12:00 am", "12:00 pm", "Party",0 );
+        myUnit3 = new fpEvent("12/12/2018", "Before Final", "12:00 am", "12:00 pm", "Suffering",0 );
 
-        myUnit4 = new fpEvent("12/11/2018", "Final", "2:30 pm", "3:00 pm", "Another Final");
+        myUnit4 = new fpEvent("12/11/2018", "Final", "2:30 pm", "3:00 pm", "Another Final",0 );
 
-        myUnit5 = new fpEvent("11/11/2018", "One month till war", "11:00 am", "2:00 pm", "Before the war");
-        myUnit6 = new fpEvent("10/11/2018", "Two month till freedom", "11:00 am", "2:00 pm", "Before-Before the war");
+        myUnit5 = new fpEvent("11/11/2018", "One month till war", "11:00 am", "2:00 pm", "Before the war",0 );
+        myUnit6 = new fpEvent("10/11/2018", "Two month till freedom", "11:00 am", "2:00 pm", "Before-Before the war",0 );
 
-        myUnit7 = new fpEvent("12/11/2017", "One year before war", "11:00 am", "2:00 pm", "After the war");
-        myUnit8 = new fpEvent("12/11/2019", "One year after war", "11:00 am", "2:00 pm", "After-After the war");
+        myUnit7 = new fpEvent("12/11/2017", "One year before war", "11:00 am", "2:00 pm", "After the war",0 );
+        myUnit8 = new fpEvent("12/11/2019", "One year after war", "11:00 am", "2:00 pm", "After-After the war",0 );
 
-        myUnitSame = new fpEvent("12/11/2018", "SE Final Day", "1:00 pm", "2:00 pm", "Poison");
+        myUnitSame = new fpEvent("12/11/2018", "SE Final Day", "1:00 pm", "2:00 pm", "Poison",0 );
     }
 
     @Test
     public void testDay1CompareTo() {
         int result = myUnit.compareTo(myUnit2);
-        assertEquals(-1, result);
+        assertEquals(1, result);
     }
 
     @Test
     public void testDay2CompareTo() {
         int result = myUnit.compareTo(myUnit3);
-        assertEquals(1, result);
+        assertEquals(-1, result);
     }
 
     @Test
     public void testDay3CompareTo() {
         int result = myUnit.compareTo(myUnit4);
-        assertEquals(0, result);
+        assertNotEquals(0, result);
     }
 
     @Test
@@ -75,13 +75,13 @@ public class TestCompareToAndEqualToTest {
     @Test
     public void testYear1CompareTo() {
         int result = myUnit.compareTo(myUnit7);
-        assertEquals(-1, result);
+        assertEquals(1, result);
     }
 
     @Test
     public void testYear2CompareTo() {
         int result = myUnit.compareTo(myUnit8);
-        assertEquals(1, result);
+        assertEquals(-1, result);
     }
 
     @Test

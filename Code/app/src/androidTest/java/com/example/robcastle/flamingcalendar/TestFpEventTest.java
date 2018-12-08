@@ -15,11 +15,11 @@ public class TestFpEventTest {
 
     @Before
     public void setUp() {
-        myUnit = new fpEvent("10/29/2018", "Birthday", "12:00 am", "12:00 pm", "Party");
-        myUnit2 = new fpEvent("10/29/2018", "Birthday", "12:00 am", "12:00 pm", "Party");
-        myUnit3 = new fpEvent("10/29/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
-        myUnit4 = new fpEvent("11/29/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
-        myUnit5 = new fpEvent("10/30/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
+        myUnit = new fpEvent("10/29/2018", "Birthday", "12:00 am", "12:00 pm", "Party",0 );
+        myUnit2 = new fpEvent("10/29/2018", "Birthday", "12:00 am", "12:00 pm", "Party",0 );
+        myUnit3 = new fpEvent("10/29/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting",0 );
+        myUnit4 = new fpEvent("11/29/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting",0 );
+        myUnit5 = new fpEvent("10/30/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting",0 );
     }
     /**
      * @author Taylor Kettle
