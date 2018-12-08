@@ -21,65 +21,125 @@ public class TestFpEventTest {
         myUnit4 = new fpEvent("11/29/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
         myUnit5 = new fpEvent("10/30/2019", "Manual Code Review", "11:00 am", "2:00 pm", "Meeting");
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the getDate() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testgetDate() {
         String result = myUnit.getDate();
         assertEquals("10/29/2018", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the setDate() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testsetDate() {
         myUnit.setDate("11/1/2018");
         String result = myUnit.getDate();
         assertEquals("11/1/2018", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the getDescription() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testgetDescription() {
         String result = myUnit.getDescription();
         assertEquals("Birthday", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the setDescription() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testsetDescription() {
         myUnit.setDescription("Manual Code Review");
         String result = myUnit.getDescription();
         assertEquals("Manual Code Review", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the getStartTime() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testgetStartTime() {
         String result = myUnit.getStartTime();
         assertEquals("12:00 am", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the setStartTime() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testsetStartTime() {
         myUnit.setStartTime("3:00 pm");
         String result = myUnit.getStartTime();
         assertNotEquals("2:00 pm", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the getEndTime() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testgetEndTime() {
         String result = myUnit.getEndTime();
         assertEquals("12:00 pm", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the setTime() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testsetEndTime() {
         myUnit.setEndTime("2:00 pm");
         String result = myUnit.getEndTime();
         assertEquals("2:00 pm", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the getName() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testgetName() {
         String result = myUnit.getName();
         assertEquals("Party", result);
     }
-
+    /**
+     * @author Taylor Kettle
+     * @return void
+     * This function tests the setName() method
+     * of the fpEvent class.
+     * @since 12/7/18
+     */
     @Test
     public void testsetName() {
         myUnit.setName("Company Meeting");
