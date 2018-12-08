@@ -146,48 +146,5 @@ public class TestFpEventTest {
         String result = myUnit.getName();
         assertEquals("Company Meeting", result);
     }
-/*
-    @Test
-    public void testCompareTo() {
-        int result = myUnit.compareTo(myUnit3);
-        assertEquals(-1, result);
-    }
-
-    @Test
-    public void test1CompareTo() {
-        int result = myUnit3.compareTo(myUnit);
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void test2CompareTo() {
-        int result = myUnit.compareTo(myUnit2);
-        assertEquals(0, result);
-    }
-
-    @Test
-    public void test3CompareTo() {
-        int result = myUnit.compareTo(myUnit4);
-        assertEquals(-1, result);
-    }
-
-    @Test
-    public void test4CompareTo() {
-        int result = myUnit4.compareTo(myUnit);
-        assertEquals(1, result);
-    }
-
-    @Test
-    public void test5CompareTo() {
-        int result = myUnit.compareTo(myUnit5);
-        assertEquals(-1, result);
-    }
-
-    @Test
-    public void test6CompareTo() {
-        int result = myUnit5.compareTo(myUnit);
-        assertEquals(1, result);
-    }
-*/
 
 }
