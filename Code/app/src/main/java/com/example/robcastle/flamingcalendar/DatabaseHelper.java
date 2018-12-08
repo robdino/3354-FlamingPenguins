@@ -189,9 +189,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
             for (int i = 0; i < eventList.size(); i++)
             {
                 if(!eventList.get(i).getName().equals(name))
-                    eventList.remove(i);
+                    eventList.remove(i--);
                 else if(!eventList.get(i).getDescription().equals(desc))
-                    eventList.remove(i);
+                    eventList.remove(i--);
                 else
                     Log.d(TAG, "Cannot separate: " + eventList.get(i).getName() + " from: " + name);
             }
@@ -255,8 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                     data.getString(4), //NAME
                     data.getInt(5)     //REMINDER
             );
-//            int reminder = Integer.parseInt(data.getString(5) ); //REMINDER
-//            newEvent.setReminder(reminder);
+
             int id = Integer.parseInt( data.getString(6) );      //IDnum
             newEvent.setIDnum(id);
 

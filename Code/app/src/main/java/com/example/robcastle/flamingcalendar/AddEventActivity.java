@@ -179,44 +179,42 @@ import java.util.concurrent.TimeUnit;
 
              final fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName, reminder);
              eventList.add(newEvent);
-             Context context = getApplicationContext();
-             int duration = Toast.LENGTH_LONG;
-             CharSequence text = "Reminder will notify in 10 seconds";
-             Toast toast = Toast.makeText(context, text, duration);
-             toast.show();
-//             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy h:mm a");
-//             Date myDate = new Date();
-//             try {
-//                 String startTimeForReminder = newEvent.getStartTime();
-//                 context = getApplicationContext();
-//                 duration = Toast.LENGTH_LONG;
-//                 toast = Toast.makeText(context, startTimeForReminder, duration);
-//                 toast.setGravity(Gravity.TOP, 0, 0);
-//                 toast.show();
-//                 myDate = sdf.parse(startTimeForReminder);
-//             } catch (ParseException e) {
-//                 Log.d(TAG, "Error parsing String time to date time");
-//             }
-//             long dateTimeInLong = myDate.getTime();
-//             System.out.println("date time in long equals to " + dateTimeInLong);
-//             long timeDelayForReminder = dateTimeInLong - (dateTimeInLong - MIN_DELAY_BY_1);
-             /******************************Notification timer delay******************************/
-             ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-             scheduler.scheduleWithFixedDelay(new Runnable() {
-                 @Override
-                 public void run() {
-                     sendNotification(newEvent.getName(), newEvent.getDescription());
-                 }
-             }, 10 , 10, TimeUnit.SECONDS);
 
-             mDatabaseHelper.addData(newEvent);
+             /**
+              * Displays a reminder if we want a reminder.
+              * Had to enclose it all in an if statement or else it would give notification for stuff
+              * that there should not have been one.
+              * @author Robbie
+              * @since 12/7/18
+              */
+             if(reminder == 1) {
+                 Context context = getApplicationContext();
+                 int duration = Toast.LENGTH_LONG;
+                 CharSequence text = "Reminder will notify in 10 seconds";
+                 Toast toast = Toast.makeText(context, text, duration);
+                 toast.show();
 
-             Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
-             startActivity(intent6);
+
+                 /******************************Notification timer delay******************************/
+                 ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+                 scheduler.scheduleWithFixedDelay(new Runnable() {
+                     @Override
+                     public void run() {
+                         sendNotification(newEvent.getName(), newEvent.getDescription());
+                     }
+                 }, 10, 10, TimeUnit.SECONDS);
+             }
+
+                 mDatabaseHelper.addData(newEvent);
+
+                 Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
+                 startActivity(intent6);
 
 
          }
      });
+
+     /****************************** MANY BUTTONS ******************************/
      dateInput.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {

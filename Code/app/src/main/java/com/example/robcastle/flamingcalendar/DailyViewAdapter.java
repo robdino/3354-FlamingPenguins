@@ -82,13 +82,11 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
         TextView eventEnd;
         ImageButton goToDeleteButton;
         ImageButton goToEdit;
-        //Switch reminderSwitch;
 
         DailyEventHolder(final View itemView) {
             super(itemView);
             generateInfo();
 
-            //WORK ON THIS
             //just delete from SQL records and refresh
             goToDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,7 +114,6 @@ public class DailyViewAdapter extends RecyclerView.Adapter<DailyViewAdapter.Dail
                 }
             });
 
-            //WORK ON THIS
             //display old records, delete old record from sql db, and save new one
             goToEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
