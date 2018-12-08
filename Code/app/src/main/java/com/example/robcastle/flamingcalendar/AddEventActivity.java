@@ -1,19 +1,37 @@
 package com.example.robcastle.flamingcalendar;
 
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;;
+import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.*;
 
- import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *@author Anthony Huynh
@@ -25,6 +43,15 @@ import java.util.Calendar;
  *
  */
  public class AddEventActivity extends AppCompatActivity {
+
+
+    /**Constants for notification timer delay in scheduler method*/
+     public static final long MIN_DELAY_BY_30 = 1200000;
+     public static final long MIN_DELAY_BY_15 =  900000;
+     public static final long MIN_DELAY_BY_10 =  600000;
+     public static final long MIN_DELAY_BY_5  =  300000;
+     public static final long MIN_DELAY_BY_1 =    60000;
+
      private static final String TAG = "AddEventActivity";
      private Button goToHome;
      private Button addEventButton;
@@ -32,32 +59,77 @@ import java.util.Calendar;
      private boolean receivingInfo;
 
      String eventName,descriptionEvent,dateEvent,startTime,endTime;
+     int reminder;
      EditText eventNameInput;
      EditText descriptionInput;
      Button dateInput;
      Button startTimeInput;
      Button endTimeInput;
      DatabaseHelper mDatabaseHelper;
+     Switch ReminderSwitch;
+     ArrayList<fpEvent> item;
 
-    ArrayList<fpEvent> item;
+    NotificationCompat.Builder notification;
+    Random random = new Random();
+    int uniqueID = random.nextInt(9999-1000) + 1000;
 
     /**
-     * @author Robbbie, Anthony, and Taylor
+     * @author Robbbie, Anthony, Taylor :: Geoffrey
      * @return void
      * This function deals with the onClickListener of all the buttons and editText fields
      * of of the addEventActivity class
-     * @since 12/04/18
+     * :: added setOnCheckedChangeListener/onCheckChanged function to notify user with small popup
+     * :: Toast message, whether ReminderSwitch is turned on or off
+     * :: Fullscreen allows notification to appear as a heads-up notification
+     * @since 12/04/18 :: 12/07/18
      */
 
      @Override
       protected void onCreate(@Nullable Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
+         /********************************Notification Instantiation********************************/
+         notification = new NotificationCompat.Builder(this, "M_CH_ID");
+         notification.setAutoCancel((true));
+         Intent intent=getIntent();
+         boolean isFullScreen =  intent.getBooleanExtra("isFullScreen", false);
+
+         if(isFullScreen )
+         {
+             requestWindowFeature(Window.FEATURE_NO_TITLE);
+             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
+         }
          setContentView(R.layout.add_event_screen);
          Log.d(TAG, "onCreate, Add Event");
          mDatabaseHelper = new DatabaseHelper(this);
          receivingInfo = false;
          generateButtons();
+         Log.d(TAG,"End of onCreate>sendNotification");
 
+         /**********************************REMINDER TOAST******************************************/
+         if (ReminderSwitch != null) {
+             ReminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                 @Override
+                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                     Context context = getApplicationContext();
+                     CharSequence text;
+                     int duration = Toast.LENGTH_SHORT;
+                     if(isChecked) {
+                         //do stuff when Switch is ON
+                         reminder = 1;
+                         text = "Reminder ON";
+                         Toast toast = Toast.makeText(context, text, duration);
+                         toast.show();
+                     } else {
+                         //do stuff when Switch if OFF
+                         reminder = 0;
+                         text = "Reminder OFF";
+                         Toast toast = Toast.makeText(context, text, duration);
+                         toast.show();
+                     }
+                 }
+             });
+         }
          Intent incomingIntent1 = getIntent();
          receivingInfo = incomingIntent1.getBooleanExtra("gettingInfo", receivingInfo);
 
@@ -85,6 +157,9 @@ import java.util.Calendar;
 
              endTimeInput.setText(item.get(0).getEndTime());
              endTime = item.get(0).getEndTime();
+
+             ReminderSwitch.setChecked(item.get(0).getBoolReminder());
+             reminder = item.get(0).getReminder();
          }
 
      addEventButton.setOnClickListener(new View.OnClickListener () {
@@ -102,16 +177,44 @@ import java.util.Calendar;
 
              ArrayList<fpEvent> eventList = WeeklyView.getEventList();
 
-             fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName);
+             final fpEvent newEvent = new fpEvent(dateEvent, descriptionEvent, startTime, endTime, eventName, reminder);
              eventList.add(newEvent);
-             mDatabaseHelper.addData(newEvent);
 
-             Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
-             startActivity(intent6);
+             /**
+              * Displays a reminder if we want a reminder.
+              * Had to enclose it all in an if statement or else it would give notification for stuff
+              * that there should not have been one.
+              * @author Robbie
+              * @since 12/7/18
+              */
+             if(reminder == 1) {
+                 Context context = getApplicationContext();
+                 int duration = Toast.LENGTH_LONG;
+                 CharSequence text = "Reminder will notify in 10 seconds";
+                 Toast toast = Toast.makeText(context, text, duration);
+                 toast.show();
+
+
+                 /******************************Notification timer delay******************************/
+                 ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+                 scheduler.scheduleWithFixedDelay(new Runnable() {
+                     @Override
+                     public void run() {
+                         sendNotification(newEvent.getName(), newEvent.getDescription());
+                     }
+                 }, 10, 10, TimeUnit.SECONDS);
+             }
+
+                 mDatabaseHelper.addData(newEvent);
+
+                 Intent intent6 = new Intent(AddEventActivity.this, WeeklyView.class);
+                 startActivity(intent6);
 
 
          }
      });
+
+     /****************************** MANY BUTTONS ******************************/
      dateInput.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -220,11 +323,13 @@ import java.util.Calendar;
      }
 
     /**
-     * @author Robbbie
+     * @author Robbbie :: Geoffrey
      * @return void
      * This function is just to make the .onCreate() function easier to read.
-     * We build our buttons here.
-     * @since 11/15/18
+     * We build our buttons here
+     * :: added ReminderSwitch button, sendNotification(String eventName, String eventDesc)
+     * :: createNotificationChannel() functions
+     * @since 11/15/18 :: 12/07/18
      */
      void generateButtons()
      {
@@ -236,9 +341,62 @@ import java.util.Calendar;
          dateInput = (Button) findViewById(R.id.dateInput);
          startTimeInput = (Button) findViewById(R.id.startTimeInput);
          endTimeInput = (Button) findViewById(R.id.endTimeInput);
+         ReminderSwitch = (Switch) findViewById(R.id.ReminderSwitch);
      }
 
+    /** Notification method with eventName and eventDescription, requiring notification channel and uniqueID
+     *  to behave a certain way. Added full screen intent to notification to pop up as a heads-up notification
+     *
+     * @param eventName
+     * @param eventDesc
+     */
+     public void sendNotification(String eventName, String eventDesc) {
+
+        notification.setSmallIcon(R.drawable.flamingpenguin);
+        notification.setTicker("This is the ticker");
+
+        notification.setWhen(System.currentTimeMillis());
+        notification.setShowWhen(true);
+        notification.setContentTitle(eventName);
+        notification.setContentText(eventDesc);
+
+        Intent intent = new Intent(this, HomeScreen.class);
+        intent.putExtra("isFullScreen", true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        final NotificationManagerCompat nmc = NotificationManagerCompat.from(this);
+        createNotificationChannel();
+        System.out.println("Notifying User...");
+        nmc.notify(uniqueID, notification.build());
+
+        /**Without this method, the notification would be repeating every so often*/
+        Handler h = new Handler();
+        long delayInMilliseconds = 5000;
+        h.postDelayed(new Runnable() {
+            public void run() {
+                    nmc.cancel(uniqueID);
+                }
+            }, 5000);
+    }
+     /**A notification requires a channel to modify how a notification behaves*/
+     public void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "M_CH_ID";//getString(R.string.channel_name);
+            String description = "M_CH_ID";//getString(R.string.channel_description);
+
+            /**IMPORTANCE_HIGH sets notification as a heads-up notification*/
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("M_CH_ID", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+}
 
 
- }
+
 
